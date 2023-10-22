@@ -61,7 +61,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
       />
       {error && <div className="error">{error}</div>}
       <button type="submit">התחבר</button>
-      <a href="#">משתמשים חדשים</a>
+      <button>משתמשים חדשים</button>
     </form>
   );
 };
