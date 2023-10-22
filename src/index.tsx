@@ -7,10 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import { setupWorker } from "msw";
 import { handlers } from "./handlers";
 
-if (process.env.NODE_ENV === "development" || process.env.USE_MSW === "true") {
-  const worker = setupWorker(...handlers);
-  worker.start();
-}
+const worker = setupWorker(...handlers);
+worker.start();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
