@@ -16,6 +16,14 @@ export const MOCK_USER_DATA = {
     name: "Rahel",
     location: "שדרות",
   },
+  "4cc3223-3bbf-1111-8045-3232233ff24": {
+    id: "4cc3223-3bbf-1111-8045-3232233ff24",
+    type: "volunteer",
+    username: "yogev",
+    password: "7583",
+    name: "Yogev Hadad",
+    location: "פתח תקווה",
+  },
 };
 
 export const MOCK_REQUESTS_DATA = {
