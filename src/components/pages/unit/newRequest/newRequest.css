@@ -1,0 +1,17 @@
+.new-request-form {
+  direction: rtl;
+  background-color: #4b5320;
+  color: #ffdb58;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.new-request-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.new-request-form input[type="submit"] {
+  background-color: #ffdb58;
+  color: #4b5320;
+}

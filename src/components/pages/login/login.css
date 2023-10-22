@@ -1,0 +1,23 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+.unit-login {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.volunteer-login {
+  background-color: #4caf50; /* Green */
+  color: white;
+}

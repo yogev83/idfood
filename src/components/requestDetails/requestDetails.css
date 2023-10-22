@@ -1,0 +1,19 @@
+.request-details {
+  direction: rtl;
+  background-color: #4b5320;
+  color: #ffdb58;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.request-details p {
+  margin-bottom: 10px;
+}
+
+.request-details button {
+  display: inline-block;
+  background-color: #ffdb58;
+  color: #4b5320;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
