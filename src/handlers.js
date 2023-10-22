@@ -2,18 +2,18 @@ import { rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import { MOCK_USER_DATA, MOCK_REQUESTS_DATA } from "./mockDB"; // Import MOCK_USER_DATA
 
-// Store MOCK_USER_DATA in localStorage under "backend/users"
-let users = JSON.parse(localStorage.getItem("backend/users"));
+// Store MOCK_USER_DATA in sessionStorage under "backend/users"
+let users = JSON.parse(sessionStorage.getItem("backend/users"));
 if (!users) {
   users = MOCK_USER_DATA;
-  localStorage.setItem("backend/users", JSON.stringify(users));
+  sessionStorage.setItem("backend/users", JSON.stringify(users));
 }
 
-// Store MOCK_REQUESTS_DATA in localStorage under "backend/requests"
-let requests = JSON.parse(localStorage.getItem("backend/requests"));
+// Store MOCK_REQUESTS_DATA in sessionStorage under "backend/requests"
+let requests = JSON.parse(sessionStorage.getItem("backend/requests"));
 if (!requests) {
   requests = MOCK_REQUESTS_DATA;
-  localStorage.setItem("backend/requests", JSON.stringify(requests));
+  sessionStorage.setItem("backend/requests", JSON.stringify(requests));
 }
 
 const handleLogin = (type) => (req, res, ctx) => {
@@ -35,9 +35,9 @@ const handleLogin = (type) => (req, res, ctx) => {
   }
 
   const token = uuidv4(); // Generate a new GUID token
-  const tokens = JSON.parse(localStorage.getItem("backend/tokens")) || {};
+  const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
   tokens[token] = user.id;
-  localStorage.setItem("backend/tokens", JSON.stringify(tokens)); // Store the token and its data in localStorage
+  sessionStorage.setItem("backend/tokens", JSON.stringify(tokens)); // Store the token and its data in sessionStorage
 
   sessionStorage.setItem("backend/sessionToken", token);
   sessionStorage.setItem("sessionToken", token); //Should this be replaced with a cookie in the real backend?...
@@ -51,8 +51,8 @@ export const handlers = [
 
   rest.get("/api/user/:loginToken", (req, res, ctx) => {
     const { loginToken } = req.params;
-    const tokens = JSON.parse(localStorage.getItem("backend/tokens")) || {};
-    const userData = users[tokens[loginToken]]; // Retrieve the user data associated with this token from localStorage
+    const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
+    const userData = users[tokens[loginToken]]; // Retrieve the user data associated with this token from sessionStorage
 
     if (!userData) {
       return res(ctx.status(404), ctx.json({ error: "Invalid login token" }));
@@ -78,7 +78,8 @@ export const handlers = [
       return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
     }
 
-    const requests = JSON.parse(localStorage.getItem("backend/requests")) || {};
+    const requests =
+      JSON.parse(sessionStorage.getItem("backend/requests")) || {};
     let filteredRequests = Object.values(requests);
 
     // Check if a status filter was provided in the query parameters
@@ -119,16 +120,16 @@ export const handlers = [
     newRequest.id = uuidv4(); // Assign a random id to the new request
     newRequest.status = "Open";
 
-    let requests = JSON.parse(localStorage.getItem("backend/requests")) || {};
+    let requests = JSON.parse(sessionStorage.getItem("backend/requests")) || {};
     requests[newRequest.id] = newRequest;
-    localStorage.setItem("backend/requests", JSON.stringify(requests)); // Store the new request in localStorage under "/requests"
+    sessionStorage.setItem("backend/requests", JSON.stringify(requests)); // Store the new request in sessionStorage under "/requests"
 
     // Update the relevant user with the new active request
-    const tokens = JSON.parse(localStorage.getItem("backend/tokens")) || {};
+    const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
     const currentUserId = tokens[sessionToken];
     users[currentUserId].activeRequest = newRequest.id;
 
-    localStorage.setItem("backend/users", JSON.stringify(users)); // Store the updated users in localStorage under "/users"
+    sessionStorage.setItem("backend/users", JSON.stringify(users)); // Store the updated users in sessionStorage under "/users"
 
     return res(ctx.status(201), ctx.json(users[currentUserId]));
   }),
@@ -145,7 +146,8 @@ export const handlers = [
     }
 
     const { requestId } = req.params;
-    const requests = JSON.parse(localStorage.getItem("backend/requests")) || {};
+    const requests =
+      JSON.parse(sessionStorage.getItem("backend/requests")) || {};
     const request = requests[requestId];
 
     if (!request) {
@@ -162,16 +164,17 @@ export const handlers = [
       request.status = "Active";
     }
 
-    // Save the updated requests back to localStorage
-    localStorage.setItem("backend/requests", JSON.stringify(requests));
+    // Save the updated requests back to sessionStorage
+    sessionStorage.setItem("backend/requests", JSON.stringify(requests));
 
     return res(ctx.status(200), ctx.json(request));
   }),
 
   rest.get("/api/requests/:requestId", (req, res, ctx) => {
     const { requestId } = req.params;
-    const requests = JSON.parse(localStorage.getItem("backend/requests")) || {};
-    const request = requests[requestId]; // Retrieve the request associated with this id from localStorage
+    const requests =
+      JSON.parse(sessionStorage.getItem("backend/requests")) || {};
+    const request = requests[requestId]; // Retrieve the request associated with this id from sessionStorage
 
     if (!request) {
       return res(ctx.status(404), ctx.json({ error: "Invalid request id" }));
@@ -187,14 +190,14 @@ export const handlers = [
     }
 
     const token = authHeader.split(" ")[1];
-    const tokens = JSON.parse(localStorage.getItem("backend/tokens")) || {};
+    const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
 
     if (!tokens[token]) {
       return res(ctx.status(401), ctx.json({ message: "Invalid token" }));
     }
 
     delete tokens[token];
-    localStorage.setItem("backend/tokens", JSON.stringify(tokens));
+    sessionStorage.setItem("backend/tokens", JSON.stringify(tokens));
 
     return res(
       ctx.status(200),

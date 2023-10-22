@@ -11,7 +11,7 @@ export const Login: React.FC = () => {
 
   // Check for existing login token
   useEffect(() => {
-    const token = localStorage.getItem("loginToken");
+    const token = sessionStorage.getItem("loginToken");
     if (token) {
       // If token exists, get user data and navigate to appropriate page
       const fetchUserData = async () => {

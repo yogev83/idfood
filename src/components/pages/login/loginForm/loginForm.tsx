@@ -35,7 +35,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
         userData = await loginAsVolunteer(username, password);
       }
 
-      localStorage.setItem("loginToken", userData.token);
+      sessionStorage.setItem("loginToken", userData.token);
       setUser(userData);
       navigate(loginType);
     } catch (error: any) {

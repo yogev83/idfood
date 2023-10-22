@@ -23,7 +23,7 @@ export const Menu = ({ closeMenu }: MenuProps) => {
       }
 
       sessionStorage.removeItem("sessionToken"); // Remove the session token from sessionStorage
-      localStorage.removeItem("loginToken"); // Remove the login token
+      sessionStorage.removeItem("loginToken"); // Remove the login token
       navigate("/");
       closeMenu(); // Close the menu
     } catch (error) {
