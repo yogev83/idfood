@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { RequestDetailsProps } from "../../requestDetails/requestDetails";
-import { NewRequest } from "./newRequest/newRequest";
+import { WishDetailsProps } from "../../wishDetails/wishDetails";
+import { NewWish } from "./newWish/newWish";
 import { UserContext } from "../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 import "./unit.css"; // Import your CSS file
-import { UnitRequestDetails } from "./unitRequestDetails/unitRequestDetails";
+import { UnitWishDetails } from "./unitWishDetails/unitWishDetails";
 
 export const Unit = () => {
   const { user } = useContext(UserContext);
-  const [showNewRequest, setShowNewRequest] = useState(false);
-  const [activeRequest, setActiveRequest] =
-    useState<RequestDetailsProps | null>(null);
+  const [showNewWish, setShowNewWish] = useState(false);
+  const [activeWish, setActiveWish] = useState<WishDetailsProps | null>(null);
 
   const navigate = useNavigate(); // Access navigate
 
@@ -21,28 +20,28 @@ export const Unit = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    if (user?.activeRequest) {
-      fetch(`/api/requests/${user.activeRequest}`)
+    if (user?.activeWish) {
+      fetch(`/api/wishs/${user.activeWish}`)
         .then((response) => response.json())
-        .then((data) => setActiveRequest(data));
-      setShowNewRequest(false);
+        .then((data) => setActiveWish(data));
+      setShowNewWish(false);
     } else {
-      setActiveRequest(null);
+      setActiveWish(null);
     }
-  }, [user, user?.activeRequest]);
+  }, [user, user?.activeWish]);
 
   return (
     <div className="unit-page">
-      {showNewRequest ? (
-        <NewRequest />
-      ) : activeRequest ? (
-        <UnitRequestDetails request={activeRequest} />
+      {showNewWish ? (
+        <NewWish />
+      ) : activeWish ? (
+        <UnitWishDetails wish={activeWish} />
       ) : (
         <>
           <h2>אין לכם בקשות פעילות</h2>
           <button
-            onClick={() => setShowNewRequest(true)}
-            className="new-request-button"
+            onClick={() => setShowNewWish(true)}
+            className="new-wish-button"
           >
             צור בקשה חדשה
           </button>

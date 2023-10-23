@@ -2,18 +2,18 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  RequestDetails,
-  RequestDetailsProps,
-} from "../../../requestDetails/requestDetails";
+  WishDetails,
+  WishDetailsProps,
+} from "../../../wishDetails/wishDetails";
 
 import { User, UserContext } from "../../../../app/userContext/userContext";
 
-import "./unitRequestDetails.css";
+import "./unitWishDetails.css";
 
-export const UnitRequestDetails = ({
-  request,
+export const UnitWishDetails = ({
+  wish,
 }: {
-  request: RequestDetailsProps;
+  wish: WishDetailsProps;
 }) => {
   const navigate = useNavigate(); // Access navigate
   const { setUser, user } = useContext(UserContext);
@@ -22,13 +22,13 @@ export const UnitRequestDetails = ({
   const [showDonePopup, setShowDonePopup] = useState(false);
 
   const handleCancel = async () => {
-    if (!request) {
+    if (!wish) {
       return;
     }
 
     // Call your backend endpoint here
     try {
-      const response = await fetch(`/api/requests/${request.id}`, {
+      const response = await fetch(`/api/wishs/${wish.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("sessionToken")}`,
@@ -43,22 +43,22 @@ export const UnitRequestDetails = ({
         // Navigate after user data has been updated
         navigate("/");
       } else {
-        // Handle the case where the request deletion failed
+        // Handle the case where the wish deletion failed
       }
     } catch (error) {
       // Handle network or other errors
-      console.error("Error deleting the request", error);
+      console.error("Error deleting the wish", error);
     }
   };
 
   const handleDone = async () => {
-    if (!request) {
+    if (!wish) {
       return;
     }
 
     // Call your backend endpoint here
     try {
-      const response = await fetch(`/api/requests/${request.id}`, {
+      const response = await fetch(`/api/wishs/${wish.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("sessionToken")}`,
@@ -75,22 +75,22 @@ export const UnitRequestDetails = ({
         // Navigate after user data has been updated
         navigate("/");
       } else {
-        // Handle the case where the request to change the status failed
+        // Handle the case where the wish to change the status failed
       }
     } catch (error) {
       // Handle network or other errors
-      console.error("Error updating request status", error);
+      console.error("Error updating wish status", error);
     }
   };
 
   return (
     <div>
       <h2>הבקשה הפעילה שלכם</h2>
-      <RequestDetails {...request} />
-      {/* Conditionally render the button based on request.status */}
-      {!request.maker && !request.deliverer ? (
+      <WishDetails {...wish} />
+      {/* Conditionally render the button based on wish.status */}
+      {!wish.maker && !wish.deliverer ? (
         <button onClick={() => setShowCancelPopup(true)}>בטל</button>
-      ) : request.status === "Active" ? (
+      ) : wish.status === "Active" ? (
         <button onClick={() => setShowDonePopup(true)}>התקבל</button>
       ) : null}
 

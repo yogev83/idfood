@@ -2,14 +2,14 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { UserContext } from "../../../../app/userContext/userContext";
 
-import "./newRequest.css"; // Import your CSS file
+import "./newWish.css"; // Import your CSS file
 
-export const NewRequest = () => {
+export const NewWish = () => {
   const [dish, setDish] = useState("");
   const [numSoldiers, setNumSoldiers] = useState("1");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState<string | null>(null);
-  const [specialRequests, setSpecialRequests] = useState("");
+  const [specialWishs, setSpecialWishs] = useState("");
   const [kosherOnly, setKosherOnly] = useState(false); // Add this line
 
   const navigate = useNavigate(); // Access navigate
@@ -20,12 +20,12 @@ export const NewRequest = () => {
     event.preventDefault();
 
     // Create a new JavaScript object
-    const newRequest = {
+    const newWish = {
       dish,
       numSoldiers,
       location,
       image,
-      specialRequests,
+      specialWishs,
       kosherOnly,
     };
 
@@ -33,17 +33,17 @@ export const NewRequest = () => {
     const sessionToken = sessionStorage.getItem("sessionToken");
 
     // Make a POST request to your API
-    const response = await fetch("/api/requests", {
+    const response = await fetch("/api/wishs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sessionToken}`, // Include the session token in the headers
       },
-      body: JSON.stringify(newRequest),
+      body: JSON.stringify(newWish),
     });
 
     if (!response.ok) {
-      console.error("Failed to submit request");
+      console.error("Failed to submit wish");
       return;
     }
 
@@ -59,7 +59,7 @@ export const NewRequest = () => {
   };
 
   return (
-    <div className="new-request-form">
+    <div className="new-wish-form">
       <h1>בקשה חדשה</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -105,8 +105,8 @@ export const NewRequest = () => {
         <label>
           בקשות מיוחדות:
           <textarea
-            value={specialRequests}
-            onChange={(e) => setSpecialRequests(e.target.value)}
+            value={specialWishs}
+            onChange={(e) => setSpecialWishs(e.target.value)}
             placeholder="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
           />
         </label>

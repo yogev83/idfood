@@ -26,7 +26,7 @@ export const MOCK_USER_DATA = {
   },
 };
 
-export const MOCK_REQUESTS_DATA = {
+export const MOCK_WISHS_DATA = {
   "43aad0-32vf-4d0e": {
     id: "43aad0-32vf-4d0e",
     dish: "ג'חנון תימני אסלי",

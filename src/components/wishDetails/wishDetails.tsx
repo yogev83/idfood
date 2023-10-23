@@ -1,6 +1,6 @@
-import "./requestDetails.css"; // Import your CSS file
+import "./wishDetails.css"; // Import your CSS filewish
 
-export interface RequestDetailsProps {
+export interface WishDetailsProps {
   id: string;
   status: "Open" | "Active" | "Closed";
   unitName: string;
@@ -9,12 +9,12 @@ export interface RequestDetailsProps {
   dish: string;
   numSoldiers: number;
   location: string;
-  specialRequests?: string;
+  specialWishs?: string;
   about?: string;
   imageURL?: string;
 }
 
-export const RequestDetails = (requestDetails: RequestDetailsProps) => {
+export const WishDetails = (wishDetails: WishDetailsProps) => {
   const {
     status,
     unitName,
@@ -23,17 +23,17 @@ export const RequestDetails = (requestDetails: RequestDetailsProps) => {
     dish,
     numSoldiers,
     location,
-    specialRequests,
+    specialWishs,
     about,
     imageURL,
-  }: RequestDetailsProps = requestDetails;
+  }: WishDetailsProps = wishDetails;
 
-  if (!requestDetails) {
-    return <div>Loading...</div>; // Show loading state while fetching request details
+  if (!wishDetails) {
+    return <div>Loading...</div>; // Show loading state while fetching wish details
   }
 
   return (
-    <div className="request-details">
+    <div className="wish-details">
       <h1>פרטי הבקשה</h1>
       <p>סטטוס: {status}</p>
       <p>מי מבקש: {unitName}</p>
@@ -42,7 +42,7 @@ export const RequestDetails = (requestDetails: RequestDetailsProps) => {
       <p>המנה: {dish}</p>
       <p>מספר חיילים: {numSoldiers}</p>
       <p>מיקום: {location}</p>
-      {specialRequests && <p>בקשות מיוחדות: {specialRequests}</p>}
+      {specialWishs && <p>בקשות מיוחדות: {specialWishs}</p>}
       {about && <p>פרטים נוספים: {about}</p>}
       {imageURL && <img src={imageURL} alt="Preview" />}
     </div>

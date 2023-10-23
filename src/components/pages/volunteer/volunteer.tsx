@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { RequestsCollection } from "./requestsCollection/requestsCollection";
-import { VolunteerRequestDetails } from "./volunteerRequestDetails/volunteerRequestDetails";
+import { WishsCollection } from "./wishsCollection/wishsCollection";
+import { VolunteerWishDetails } from "./volunteerWishDetails/volunteerWishDetails";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../app/userContext/userContext";
 import { VolunteerDashboard } from "./volunteerDashboard/volunteerDahsboard";
@@ -9,15 +9,15 @@ export const Volunteer = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate(); // Access navigate
 
-  const [handledRequest, setHandledRequest] = useState(null);
-  const [showRequestsCollection, setShowRequestsCollection] = useState(false);
+  const [handledWish, setHandledWish] = useState(null);
+  const [showWishsCollection, setShowWishsCollection] = useState(false);
 
-  const handleRequestClick = (request: any) => {
-    setHandledRequest(request);
+  const handleWishClick = (wish: any) => {
+    setHandledWish(wish);
   };
 
-  const handleShowOpenRequests = () => {
-    setShowRequestsCollection(true);
+  const handleShowOpenWishs = () => {
+    setShowWishsCollection(true);
   };
 
   useEffect(() => {
@@ -28,12 +28,12 @@ export const Volunteer = () => {
 
   return (
     <div className="volunteer-page" dir="rtl">
-      {handledRequest ? (
-        <VolunteerRequestDetails requestDetails={handledRequest} />
-      ) : showRequestsCollection ? (
-        <RequestsCollection handleRequestClick={handleRequestClick} />
+      {handledWish ? (
+        <VolunteerWishDetails wishDetails={handledWish} />
+      ) : showWishsCollection ? (
+        <WishsCollection handleWishClick={handleWishClick} />
       ) : (
-        <VolunteerDashboard showOpenRequests={handleShowOpenRequests} />
+        <VolunteerDashboard showOpenWishs={handleShowOpenWishs} />
       )}
     </div>
   );

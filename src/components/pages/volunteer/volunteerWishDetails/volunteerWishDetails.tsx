@@ -1,27 +1,27 @@
 import { useContext } from "react";
 import {
-  RequestDetails,
-  RequestDetailsProps,
-} from "../../../requestDetails/requestDetails";
+  WishDetails,
+  WishDetailsProps,
+} from "../../../wishDetails/wishDetails";
 import { UserContext } from "../../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 
-export const VolunteerRequestDetails = ({
-  requestDetails,
+export const VolunteerWishDetails = ({
+  wishDetails,
 }: {
-  requestDetails: RequestDetailsProps;
+  wishDetails: WishDetailsProps;
 }) => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate(); // Access navigate
 
-  const handleRequest = async (key: string) => {
+  const handleWish = async (key: string) => {
     try {
       if (!user) {
         throw new Error("User is invalid");
       }
 
       const sessionToken = sessionStorage.getItem("sessionToken");
-      const response = await fetch(`/api/requests/${requestDetails.id}`, {
+      const response = await fetch(`/api/wishs/${wishDetails.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${sessionToken}`,
@@ -33,34 +33,34 @@ export const VolunteerRequestDetails = ({
       });
       if (!response.ok) {
         throw new Error(
-          `Error ${key === "maker" ? "making" : "delivering"} request`
+          `Error ${key === "maker" ? "making" : "delivering"} wish`
         );
       }
       navigate("/");
     } catch (error) {
       console.error(
-        `Error ${key === "maker" ? "making" : "delivering"} request:`,
+        `Error ${key === "maker" ? "making" : "delivering"} wish:`,
         error
       );
     }
   };
 
-  if (!requestDetails) {
-    throw new Error("Request is required");
+  if (!wishDetails) {
+    throw new Error("Wish is required");
   }
 
-  const { status, maker, deliverer } = requestDetails;
+  const { status, maker, deliverer } = wishDetails;
 
   return (
     <>
-      <RequestDetails {...requestDetails} />
+      <WishDetails {...wishDetails} />
       {status === "Open" && (!maker || !deliverer) && (
         <>
           {!maker && (
-            <button onClick={() => handleRequest("maker")}>אני במטבח!</button>
+            <button onClick={() => handleWish("maker")}>אני במטבח!</button>
           )}
           {!deliverer && (
-            <button onClick={() => handleRequest("deliverer")}>אני אקח!</button>
+            <button onClick={() => handleWish("deliverer")}>אני אקח!</button>
           )}
         </>
       )}

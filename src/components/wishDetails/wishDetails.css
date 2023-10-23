@@ -1,4 +1,4 @@
-.request-details {
+.wish-details {
   direction: rtl;
   background-color: #4b5320;
   color: #ffdb58;
@@ -6,11 +6,11 @@
   border-radius: 10px;
 }
 
-.request-details p {
+.wish-details p {
   margin-bottom: 10px;
 }
 
-.request-details button {
+.wish-details button {
   display: inline-block;
   background-color: #ffdb58;
   color: #4b5320;

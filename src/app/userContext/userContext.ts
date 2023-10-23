@@ -4,7 +4,7 @@ import React from 'react';
 export type User = {
   id: string;
   type: "unit | volunteer";
-  activeRequest?: string;
+  activeWish?: string;
   username?: string;
   unitname?: string;
 };

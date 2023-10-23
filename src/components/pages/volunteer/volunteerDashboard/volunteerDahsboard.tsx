@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { RequestCard } from "../requestCard/requestCard";
-import { RequestDetailsProps } from "../../../requestDetails/requestDetails";
+import { WishDetailsProps } from "../../../wishDetails/wishDetails";
 import { UserContext } from "../../../../app/userContext/userContext";
 
 import "./volunteerDashboard.css";
+import { WishCard } from "../wishCard/wishCard";
 
 export const VolunteerDashboard = ({
-  showOpenRequests,
+  showOpenWishs,
 }: {
-  showOpenRequests: () => void;
+  showOpenWishs: () => void;
 }) => {
-  const [requests, setRequests] = useState<RequestDetailsProps[]>([]);
+  const [wishs, setWishs] = useState<WishDetailsProps[]>([]);
   const [activeTab, setActiveTab] = useState("toMake");
   const { user } = useContext(UserContext);
 
@@ -21,14 +21,14 @@ export const VolunteerDashboard = ({
       return;
     }
 
-    // Fetch all requests linked with this user
-    fetch(`/api/requests?user=${user.id}`, {
+    // Fetch all wishs linked with this user
+    fetch(`/api/wishs?user=${user.id}`, {
       headers: {
         Authorization: `Bearer ${sessionToken}`,
       },
     })
       .then((response) => response.json())
-      .then((data) => setRequests(data))
+      .then((data) => setWishs(data))
       .catch((error) => console.error("Error:", error));
   }, [sessionToken, user]);
 
@@ -36,10 +36,8 @@ export const VolunteerDashboard = ({
     return null;
   }
 
-  const filteredRequests = requests.filter((request) =>
-    activeTab === "toMake"
-      ? request.maker === user.id
-      : request.deliverer === user.id
+  const filteredWishs = wishs.filter((wish) =>
+    activeTab === "toMake" ? wish.maker === user.id : wish.deliverer === user.id
   );
 
   return (
@@ -48,15 +46,15 @@ export const VolunteerDashboard = ({
         <button onClick={() => setActiveTab("toMake")}>להכנה</button>
         <button onClick={() => setActiveTab("toDeliver")}>למשלוח</button>
       </div>
-      {filteredRequests.length > 0 ? (
-        filteredRequests.map((request) => (
-          <div key={request.id}>
-            <RequestCard
-              id={request.id}
-              dish={request.dish}
-              unitName={request.unitName}
-              location={request.location}
-              imageURL={request.imageURL}
+      {filteredWishs.length > 0 ? (
+        filteredWishs.map((wish) => (
+          <div key={wish.id}>
+            <WishCard
+              id={wish.id}
+              dish={wish.dish}
+              unitName={wish.unitName}
+              location={wish.location}
+              imageURL={wish.imageURL}
               onClick={() => console.log("Clicked!")}
             />
           </div>
@@ -66,7 +64,7 @@ export const VolunteerDashboard = ({
           <p>אין לכם בקשות בהמתנה</p>
         </div>
       )}
-      <button onClick={showOpenRequests}>בקשות מהשטח</button>
+      <button onClick={showOpenWishs}>בקשות מהשטח</button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-.new-request-form {
+.new-wish-form {
   direction: rtl;
   background-color: #4b5320;
   color: #ffdb58;
@@ -6,12 +6,12 @@
   border-radius: 10px;
 }
 
-.new-request-form label {
+.new-wish-form label {
   display: block;
   margin-bottom: 10px;
 }
 
-.new-request-form input[type="submit"] {
+.new-wish-form input[type="submit"] {
   background-color: #ffdb58;
   color: #4b5320;
 }

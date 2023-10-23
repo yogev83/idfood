@@ -1,6 +1,6 @@
-import "./requestCard.css"; // Import your CSS file
+import "./wishCard.css"; // Import your CSS file
 
-export const RequestCard = ({
+export const WishCard = ({
   id,
   dish,
   unitName,
@@ -16,7 +16,7 @@ export const RequestCard = ({
   onClick: (id: string) => void;
 }) => {
   return (
-    <div className="request-card" onClick={() => onClick(id)} dir="rtl">
+    <div className="wish-card" onClick={() => onClick(id)} dir="rtl">
       {imageURL && <img src={imageURL} alt={dish} />}{" "}
       {/* Check if imageURL exists before rendering img */}
       <h2>{dish}</h2>

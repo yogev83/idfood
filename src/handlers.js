@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
-import { MOCK_USER_DATA, MOCK_REQUESTS_DATA } from "./mockDB"; // Import MOCK_USER_DATA
+import { MOCK_USER_DATA, MOCK_WISHS_DATA } from "./mockDB"; // Import MOCK_USER_DATA
 
 // Store MOCK_USER_DATA in sessionStorage under "backend/users"
 let users = JSON.parse(sessionStorage.getItem("backend/users"));
@@ -9,15 +9,15 @@ if (!users) {
   sessionStorage.setItem("backend/users", JSON.stringify(users));
 }
 
-// Store MOCK_REQUESTS_DATA in sessionStorage under "backend/requests"
-let requests = JSON.parse(sessionStorage.getItem("backend/requests"));
-if (!requests) {
-  requests = MOCK_REQUESTS_DATA;
-  sessionStorage.setItem("backend/requests", JSON.stringify(requests));
+// Store MOCK_WISHS_DATA in sessionStorage under "backend/wishs"
+let wishs = JSON.parse(sessionStorage.getItem("backend/wishs"));
+if (!wishs) {
+  wishs = MOCK_WISHS_DATA;
+  sessionStorage.setItem("backend/wishs", JSON.stringify(wishs));
 }
 
 const handleLogin = (type) => (req, res, ctx) => {
-  const { username, password } = req.body; // Get username and password from request body
+  const { username, password } = req.body; // Get username and password from wish body
 
   // Check if user exists and password is correct
   const user = Object.values(users).find(
@@ -67,29 +67,27 @@ export const handlers = [
     );
   }),
 
-  rest.get("/api/requests", (req, res, ctx) => {
-    // Get the session token from the request headers
+  rest.get("/api/wishs", (req, res, ctx) => {
+    // Get the session token from the wish headers
     const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
 
-    // Check if there is a logged-in user and if their session token matches the one from the request
+    // Check if there is a logged-in user and if their session token matches the one from the wish
     const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
 
     if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
       return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
     }
 
-    const requests =
-      JSON.parse(sessionStorage.getItem("backend/requests")) || {};
-    let filteredRequests = Object.values(requests);
+    const wishs = JSON.parse(sessionStorage.getItem("backend/wishs")) || {};
+    let filteredWishs = Object.values(wishs);
 
     // Check if a status filter was provided in the query parameters
     const userFilter = req.url.searchParams.get("user");
 
-    // Filter requests where the current user is either the maker or deliverer
+    // Filter wishs where the current user is either the maker or deliverer
     if (userFilter) {
-      filteredRequests = filteredRequests.filter(
-        (request) =>
-          request.maker === userFilter || request.deliverer === userFilter
+      filteredWishs = filteredWishs.filter(
+        (wish) => wish.maker === userFilter || wish.deliverer === userFilter
       );
     }
 
@@ -97,103 +95,102 @@ export const handlers = [
     const statusFilter = req.url.searchParams.get("status");
 
     if (statusFilter) {
-      filteredRequests = filteredRequests.filter(
-        (request) => request.status === statusFilter
+      filteredWishs = filteredWishs.filter(
+        (wish) => wish.status === statusFilter
       );
     }
 
-    return res(ctx.status(200), ctx.json(filteredRequests));
+    return res(ctx.status(200), ctx.json(filteredWishs));
   }),
 
-  rest.post("/api/requests", async (req, res, ctx) => {
-    // Get the session token from the request headers
+  rest.post("/api/wishs", async (req, res, ctx) => {
+    // Get the session token from the wish headers
     const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
 
-    // Check if there is a logged-in user and if their session token matches the one from the request
+    // Check if there is a logged-in user and if their session token matches the one from the wish
     const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
 
     if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
       return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
     }
 
-    const newRequest = await req.json(); // Get the new request from the request body
-    newRequest.id = uuidv4(); // Assign a random id to the new request
-    newRequest.status = "Open";
+    const newWish = await req.json(); // Get the new wish from the wish body
+    newWish.id = uuidv4(); // Assign a random id to the new wish
+    newWish.status = "Open";
 
-    requests[newRequest.id] = newRequest;
-    sessionStorage.setItem("backend/requests", JSON.stringify(requests)); // Store the new request in sessionStorage under "/requests"
+    wishs[newWish.id] = newWish;
+    sessionStorage.setItem("backend/wishs", JSON.stringify(wishs)); // Store the new wish in sessionStorage under "/wishs"
 
-    // Update the relevant user with the new active request
+    // Update the relevant user with the new active wish
     const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
     const currentUserId = tokens[sessionToken];
-    users[currentUserId].activeRequest = newRequest.id;
+    users[currentUserId].activeWish = newWish.id;
 
     sessionStorage.setItem("backend/users", JSON.stringify(users)); // Store the updated users in sessionStorage under "/users"
 
     return res(ctx.status(201), ctx.json(users[currentUserId]));
   }),
 
-  rest.put("/api/requests/:requestId", async (req, res, ctx) => {
-    // Get the session token from the request headers
+  rest.put("/api/wishs/:wishId", async (req, res, ctx) => {
+    // Get the session token from the wish headers
     const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
 
-    // Check if there is a logged-in user and if their session token matches the one from the request
+    // Check if there is a logged-in user and if their session token matches the one from the wish
     const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
 
     if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
       return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
     }
 
-    const { requestId } = req.params;
-    const request = requests[requestId];
+    const { wishId } = req.params;
+    const wish = wishs[wishId];
 
-    if (!request) {
-      return res(ctx.status(404), ctx.json({ error: "Invalid request id" }));
+    if (!wish) {
+      return res(ctx.status(404), ctx.json({ error: "Invalid wish id" }));
     }
 
     const update = await req.json();
 
-    // Update the request with the new data
-    Object.assign(request, update);
+    // Update the wish with the new data
+    Object.assign(wish, update);
 
     // If both maker and deliverer are populated, update status to Active
-    if (request.maker && request.deliverer) {
-      request.status = "Active";
+    if (wish.maker && wish.deliverer) {
+      wish.status = "Active";
     }
 
     let currentUserId;
     if (update.status === "Closed") {
-      // Remove the activeRequest field from the relevant user
+      // Remove the activeWish field from the relevant user
       const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
       currentUserId = tokens[sessionToken];
-      delete users[currentUserId].activeRequest;
+      delete users[currentUserId].activeWish;
       sessionStorage.setItem("backend/users", JSON.stringify(users));
     }
 
-    // Save the updated requests back to sessionStorage
-    sessionStorage.setItem("backend/requests", JSON.stringify(requests));
+    // Save the updated wishs back to sessionStorage
+    sessionStorage.setItem("backend/wishs", JSON.stringify(wishs));
 
     return res(ctx.status(200), ctx.json(users[currentUserId]));
   }),
 
-  rest.get("/api/requests/:requestId", (req, res, ctx) => {
-    const { requestId } = req.params;
-    const requests =
-      JSON.parse(sessionStorage.getItem("backend/requests")) || {};
-    const request = requests[requestId]; // Retrieve the request associated with this id from sessionStorage
+  rest.get("/api/wishs/:wishId", (req, res, ctx) => {
+    const { wishId } = req.params;
+    const wishs = JSON.parse(sessionStorage.getItem("backend/wishs")) || {};
+    const wish = wishs[wishId]; // Retrieve the wish associated with this id from sessionStorage
 
-    if (!request) {
-      return res(ctx.status(404), ctx.json({ error: "Invalid request id" }));
+    if (!wish) {
+      return res(ctx.status(404), ctx.json({ error: "Invalid wish id" }));
     }
 
-    return res(ctx.status(200), ctx.json(request));
+    return res(ctx.status(200), ctx.json(wish));
   }),
 
-  rest.delete("/api/requests/:requestId", async (req, res, ctx) => {
+  rest.delete("/api/wishs/:wishId", async (req, res, ctx) => {
     const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
-    const requestId = req.params.requestId;
+    const wishId = req.params.wishId;
 
-    // Check if there is a logged-in user and if their session token matches the one from the request
+    // Check if there is a logged-in user and if their session token matches the one from the wish
     const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
 
     if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
@@ -202,11 +199,11 @@ export const handlers = [
 
     const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
     const currentUserId = tokens[sessionToken];
-    delete users[currentUserId].activeRequest;
+    delete users[currentUserId].activeWish;
     sessionStorage.setItem("backend/users", JSON.stringify(users));
 
-    delete requests[requestId];
-    sessionStorage.setItem("backend/requests", JSON.stringify(requests));
+    delete wishs[wishId];
+    sessionStorage.setItem("backend/wishs", JSON.stringify(wishs));
 
     return res(ctx.status(204));
   }),
