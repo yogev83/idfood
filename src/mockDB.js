@@ -32,7 +32,7 @@ export const MOCK_WISHS_DATA = {
     dish: "ג'חנון תימני אסלי",
     unitName: "פלוגת עורב",
     location: "אזור קרית שמונה",
-    imageURL: "Image URL 1",
+    imageURL: "soldiers2.jpeg",
     status: "Open", // Add status
     numSoldiers: 10, // Add numSoldiers
   },
@@ -41,7 +41,7 @@ export const MOCK_WISHS_DATA = {
     dish: "פנקייקים",
     unitName: "יחידת הנדסה",
     location: "אזור אשקלון",
-    imageURL: "Image URL 2",
+    imageURL: "soldiers1.jpeg",
     status: "Open", // Add status
     numSoldiers: 5, // Add numSoldiers
   },

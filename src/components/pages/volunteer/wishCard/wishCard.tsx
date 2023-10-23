@@ -17,8 +17,7 @@ export const WishCard = ({
 }) => {
   return (
     <div className="wish-card" onClick={() => onClick(id)} dir="rtl">
-      {imageURL && <img src={imageURL} alt={dish} />}{" "}
-      {/* Check if imageURL exists before rendering img */}
+      {<img src={imageURL || "avatar.jpeg"} alt={dish} />}
       <h2>{dish}</h2>
       <p>{unitName}</p>
       <p>{location}</p>

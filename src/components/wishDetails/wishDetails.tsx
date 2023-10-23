@@ -1,4 +1,4 @@
-import "./wishDetails.css"; // Import your CSS filewish
+import "./wishDetails.css"; // Import your CSS file
 
 export interface WishDetailsProps {
   id: string;
@@ -36,15 +36,19 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
     <div className="wish-details">
       <h1>פרטי הבקשה</h1>
       <p>סטטוס: {status}</p>
-      <p>מי מבקש: {unitName}</p>
-      {maker && <p>מי מכין: {maker}</p>}
-      {deliverer && <p>מי לוקח: {deliverer}</p>}
+      {(!maker || !deliverer) && <p>בקשה בהמתנה למתנדבים</p>}
       <p>המנה: {dish}</p>
       <p>מספר חיילים: {numSoldiers}</p>
       <p>מיקום: {location}</p>
       {specialWishs && <p>בקשות מיוחדות: {specialWishs}</p>}
       {about && <p>פרטים נוספים: {about}</p>}
-      {imageURL && <img src={imageURL} alt="Preview" />}
+      {
+        <img
+          src={imageURL || "avatar.jpeg"}
+          alt="Preview"
+          style={{ width: "100%" }}
+        />
+      }
     </div>
   );
 };
