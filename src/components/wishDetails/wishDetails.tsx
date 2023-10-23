@@ -34,8 +34,7 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
   return (
     <div className="wish-details">
       <h1>פרטי הבקשה</h1>
-      <p>סטטוס: {status}</p>
-      {(!maker || !deliverer) && <p>בקשה בהמתנה למתנדבים</p>}
+      <h2>{!maker || !deliverer ? "בקשה בהמתנה למתנדבים" : "בקשה בטיפול"}</h2>
       <p>המנה: {dish}</p>
       <p>מספר חיילים: {numSoldiers}</p>
       <p>מיקום: {location}</p>
