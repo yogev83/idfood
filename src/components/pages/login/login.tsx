@@ -4,6 +4,8 @@ import { UserContext } from "../../../app/userContext/userContext";
 import { loginWithToken } from "./loginService";
 import { LoginForm } from "./loginForm/loginForm";
 
+import "./login.css";
+
 export const Login: React.FC = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);

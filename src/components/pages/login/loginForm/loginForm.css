@@ -1,4 +1,3 @@
-/* LoginForm.css */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -10,17 +9,17 @@
 }
 
 .login-form button {
-  background-color: #adff2f;
-  color: #8b4513;
+  margin-top: 20px;
   padding: 10px 20px;
+  font-size: 18px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 10px;
 }
 
 .login-form a {
   margin-top: 20px;
-  color: #8b4513;
 }
 
 .login-form .error {

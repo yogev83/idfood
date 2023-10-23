@@ -4,20 +4,28 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-size: cover;
 }
 
 .login-button {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 18px;
+  background-color: var(--secondary-color);
+  color: var(--p);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .unit-login {
-  background-color: #f44336; /* Red */
-  color: white;
+  /* Change to blue color */
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .volunteer-login {
-  background-color: #4caf50; /* Green */
-  color: white;
+  /* Change to red color */
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
