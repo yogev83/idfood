@@ -17,7 +17,6 @@ export interface WishDetailsProps {
 export const WishDetails = (wishDetails: WishDetailsProps) => {
   const {
     status,
-    unitName,
     maker,
     deliverer,
     dish,
