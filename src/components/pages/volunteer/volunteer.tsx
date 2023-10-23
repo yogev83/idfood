@@ -33,7 +33,10 @@ export const Volunteer = () => {
       ) : showWishsCollection ? (
         <WishsCollection handleWishClick={handleWishClick} />
       ) : (
-        <VolunteerDashboard showOpenWishs={handleShowOpenWishs} />
+        <VolunteerDashboard
+          showOpenWishs={handleShowOpenWishs}
+          handleWishClick={handleWishClick}
+        />
       )}
     </div>
   );

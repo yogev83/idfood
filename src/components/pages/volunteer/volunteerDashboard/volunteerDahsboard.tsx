@@ -7,8 +7,10 @@ import { WishCard } from "../wishCard/wishCard";
 
 export const VolunteerDashboard = ({
   showOpenWishs,
+  handleWishClick,
 }: {
   showOpenWishs: () => void;
+  handleWishClick: (wish: WishDetailsProps) => void;
 }) => {
   const [wishs, setWishs] = useState<WishDetailsProps[]>([]);
   const [activeTab, setActiveTab] = useState("toMake");
@@ -40,11 +42,26 @@ export const VolunteerDashboard = ({
     activeTab === "toMake" ? wish.maker === user.id : wish.deliverer === user.id
   );
 
+  const isMaker = wishs.some((wish) => wish.maker === user.id);
+  const isDeliverer = wishs.some((wish) => wish.deliverer === user.id);
+
   return (
     <div className="volunteer-dashboard">
-      <div>
-        <button onClick={() => setActiveTab("toMake")}>להכנה</button>
-        <button onClick={() => setActiveTab("toDeliver")}>למשלוח</button>
+      <div className="tab">
+        <button
+          className={`tablinks ${activeTab === "toMake" ? "active" : ""}`}
+          onClick={() => setActiveTab("toMake")}
+          disabled={!isMaker}
+        >
+          להכנה
+        </button>
+        <button
+          className={`tablinks ${activeTab === "toDeliver" ? "active" : ""}`}
+          onClick={() => setActiveTab("toDeliver")}
+          disabled={!isDeliverer}
+        >
+          למשלוח
+        </button>
       </div>
       {filteredWishs.length > 0 ? (
         filteredWishs.map((wish) => (
@@ -55,7 +72,7 @@ export const VolunteerDashboard = ({
               unitName={wish.unitName}
               location={wish.location}
               imageURL={wish.imageURL}
-              onClick={() => console.log("Clicked!")}
+              onClick={() => handleWishClick(wish)}
             />
           </div>
         ))
@@ -64,7 +81,9 @@ export const VolunteerDashboard = ({
           <p>אין לכם בקשות בהמתנה</p>
         </div>
       )}
-      <button onClick={showOpenWishs}>בקשות מהשטח</button>
+      <button className="open-wishs-button" onClick={showOpenWishs}>
+        בקשות מהשטח
+      </button>
     </div>
   );
 };

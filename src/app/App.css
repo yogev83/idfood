@@ -6,6 +6,9 @@
   --padding: 20px;
   --border-radius: 10px;
   --margin-bottom: 10px;
+  --spacing-small: 10px; /* Replace with your desired spacing */
+  --spacing-large: 20px; /* Replace with your desired spacing */
+  --border-radius-medium: 5px; /* Replace with your desired border radius */
 }
 
 .IDFood {
