@@ -10,11 +10,7 @@ import { User, UserContext } from "../../../../app/userContext/userContext";
 
 import "./unitWishDetails.css";
 
-export const UnitWishDetails = ({
-  wish,
-}: {
-  wish: WishDetailsProps;
-}) => {
+export const UnitWishDetails = ({ wish }: { wish: WishDetailsProps }) => {
   const navigate = useNavigate(); // Access navigate
   const { setUser, user } = useContext(UserContext);
 
@@ -107,7 +103,7 @@ export const UnitWishDetails = ({
             >
               X
             </div>
-            <p>לבטל את הבקשה?</p>
+            <p>?לבטל את הבקשה</p>
             <button onClick={handleCancel}>כן</button>
           </div>
         </div>
@@ -123,7 +119,7 @@ export const UnitWishDetails = ({
             >
               X
             </div>
-            <p>בתיאבון! לסגור בקשה?</p>
+            <p>?בתיאבון! לסגור בקשה</p>
             <button onClick={handleDone}>כן</button>
           </div>
         </div>
