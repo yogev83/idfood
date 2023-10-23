@@ -1,4 +1,6 @@
 :root {
+  --primary-color: #0038b8; /* Blue */
+  --secondary-color: #ffffff; /* White */
   --background-color: #4b5320;
   --text-color: #ffdb58;
   --padding: 20px;
@@ -6,19 +8,9 @@
   --margin-bottom: 10px;
 }
 
-.App {
+.IDFood {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color: var(--secondary-color);
 }
 
 .App-header {

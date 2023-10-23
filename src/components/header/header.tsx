@@ -42,8 +42,16 @@ export const Header = () => {
       <button className="menu-button" onClick={handleMenuClick}>
         ☰
       </button>
-      <h1>IDFood</h1>
-      {user?.username && <p>Welcome, {user.username}!</p>}
+      <span className="logo-wrapper">
+        <h4>?מי פנוי לג'חנון</h4>
+        <img
+          src="/idfood.jpeg"
+          alt="IDFood Logo"
+          className="logo"
+          onClick={() => navigate("/")}
+        />
+      </span>
+      {user?.username && <h2>!{user.username} שלום</h2>}
       <button className="close-button" onClick={() => navigate("/")}>
         X
       </button>

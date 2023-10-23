@@ -3,6 +3,8 @@ import { Nav } from "../components/nav/nav";
 import { UserProvider } from "./userContext/userProvider";
 import { Header } from "../components/header/header";
 
+import "./App.css";
+
 // Use the Router in your app
 function App() {
   return (
