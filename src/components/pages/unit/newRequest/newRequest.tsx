@@ -8,7 +8,6 @@ export const NewRequest = () => {
   const [dish, setDish] = useState("");
   const [numSoldiers, setNumSoldiers] = useState("1");
   const [location, setLocation] = useState("");
-  const [about, setAbout] = useState("");
   const [image, setImage] = useState<string | null>(null);
   const [specialRequests, setSpecialRequests] = useState("");
   const [kosherOnly, setKosherOnly] = useState(false); // Add this line
@@ -25,7 +24,6 @@ export const NewRequest = () => {
       dish,
       numSoldiers,
       location,
-      about,
       image,
       specialRequests,
       kosherOnly,
@@ -111,10 +109,6 @@ export const NewRequest = () => {
             onChange={(e) => setSpecialRequests(e.target.value)}
             placeholder="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
           />
-        </label>
-        <label>
-          קצת עליכם:
-          <textarea value={about} onChange={(e) => setAbout(e.target.value)} />
         </label>
         <label>
           תמונה:

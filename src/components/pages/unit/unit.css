@@ -1,17 +1,17 @@
 .unit-form {
   direction: rtl;
-  background-color: #4b5320;
-  color: #ffdb58;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
 }
 
 .unit-form label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: var(--margin-bottom);
 }
 
 .unit-form input[type="submit"] {
-  background-color: #ffdb58;
-  color: #4b5320;
+  background-color: var(--text-color);
+  color: var(--background-color);
 }

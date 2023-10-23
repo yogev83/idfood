@@ -120,7 +120,6 @@ export const handlers = [
     newRequest.id = uuidv4(); // Assign a random id to the new request
     newRequest.status = "Open";
 
-    let requests = JSON.parse(sessionStorage.getItem("backend/requests")) || {};
     requests[newRequest.id] = newRequest;
     sessionStorage.setItem("backend/requests", JSON.stringify(requests)); // Store the new request in sessionStorage under "/requests"
 
@@ -146,8 +145,6 @@ export const handlers = [
     }
 
     const { requestId } = req.params;
-    const requests =
-      JSON.parse(sessionStorage.getItem("backend/requests")) || {};
     const request = requests[requestId];
 
     if (!request) {
@@ -164,10 +161,19 @@ export const handlers = [
       request.status = "Active";
     }
 
+    let currentUserId;
+    if (update.status === "Closed") {
+      // Remove the activeRequest field from the relevant user
+      const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
+      currentUserId = tokens[sessionToken];
+      delete users[currentUserId].activeRequest;
+      sessionStorage.setItem("backend/users", JSON.stringify(users));
+    }
+
     // Save the updated requests back to sessionStorage
     sessionStorage.setItem("backend/requests", JSON.stringify(requests));
 
-    return res(ctx.status(200), ctx.json(request));
+    return res(ctx.status(200), ctx.json(users[currentUserId]));
   }),
 
   rest.get("/api/requests/:requestId", (req, res, ctx) => {
@@ -181,6 +187,28 @@ export const handlers = [
     }
 
     return res(ctx.status(200), ctx.json(request));
+  }),
+
+  rest.delete("/api/requests/:requestId", async (req, res, ctx) => {
+    const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
+    const requestId = req.params.requestId;
+
+    // Check if there is a logged-in user and if their session token matches the one from the request
+    const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
+
+    if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
+      return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
+    }
+
+    const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
+    const currentUserId = tokens[sessionToken];
+    delete users[currentUserId].activeRequest;
+    sessionStorage.setItem("backend/users", JSON.stringify(users));
+
+    delete requests[requestId];
+    sessionStorage.setItem("backend/requests", JSON.stringify(requests));
+
+    return res(ctx.status(204));
   }),
 
   rest.post("/api/logout", (req, res, ctx) => {

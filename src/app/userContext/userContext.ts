@@ -3,6 +3,7 @@ import React from 'react';
 // Define a type for the user data
 export type User = {
   id: string;
+  type: "unit | volunteer";
   activeRequest?: string;
   username?: string;
   unitname?: string;

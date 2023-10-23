@@ -1,14 +1,10 @@
-//import React, { useContext } from "react";
-import {
-  RequestDetails,
-  RequestDetailsProps,
-} from "../../requestDetails/requestDetails";
 import { useContext, useEffect, useState } from "react";
+import { RequestDetailsProps } from "../../requestDetails/requestDetails";
 import { NewRequest } from "./newRequest/newRequest";
 import { UserContext } from "../../../app/userContext/userContext";
-
-import "./unit.css"; // Import your CSS file
 import { useNavigate } from "react-router-dom";
+import "./unit.css"; // Import your CSS file
+import { UnitRequestDetails } from "./unitRequestDetails/unitRequestDetails";
 
 export const Unit = () => {
   const { user } = useContext(UserContext);
@@ -30,6 +26,8 @@ export const Unit = () => {
         .then((response) => response.json())
         .then((data) => setActiveRequest(data));
       setShowNewRequest(false);
+    } else {
+      setActiveRequest(null);
     }
   }, [user, user?.activeRequest]);
 
@@ -38,10 +36,7 @@ export const Unit = () => {
       {showNewRequest ? (
         <NewRequest />
       ) : activeRequest ? (
-        <div>
-          <h2>הבקשה הפעילה שלכם</h2>
-          <RequestDetails {...activeRequest} />
-        </div>
+        <UnitRequestDetails request={activeRequest} />
       ) : (
         <>
           <h2>אין לכם בקשות פעילות</h2>
