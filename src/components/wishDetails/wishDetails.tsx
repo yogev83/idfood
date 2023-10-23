@@ -16,7 +16,6 @@ export interface WishDetailsProps {
 
 export const WishDetails = (wishDetails: WishDetailsProps) => {
   const {
-    status,
     maker,
     deliverer,
     dish,
@@ -34,7 +33,7 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
   return (
     <div className="wish-details">
       <h1>פרטי הבקשה</h1>
-      <h2>{!maker || !deliverer ? "בקשה בהמתנה למתנדבים" : "בקשה בטיפול"}</h2>
+      <h3>{!maker || !deliverer ? "בקשה בהמתנה למתנדבים" : "בקשה בטיפול"}</h3>
       <p>המנה: {dish}</p>
       <p>מספר חיילים: {numSoldiers}</p>
       <p>מיקום: {location}</p>

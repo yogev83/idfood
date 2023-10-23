@@ -3,8 +3,9 @@ import { WishDetailsProps } from "../../wishDetails/wishDetails";
 import { NewWish } from "./newWish/newWish";
 import { UserContext } from "../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
-import "./unit.css"; // Import your CSS file
 import { UnitWishDetails } from "./unitWishDetails/unitWishDetails";
+
+import "./unit.css"; // Import your CSS file
 
 export const Unit = () => {
   const { user } = useContext(UserContext);
@@ -37,7 +38,7 @@ export const Unit = () => {
       ) : activeWish ? (
         <UnitWishDetails wish={activeWish} />
       ) : (
-        <>
+        <span>
           <h2>אין לכם בקשות פעילות</h2>
           <button
             onClick={() => setShowNewWish(true)}
@@ -45,7 +46,7 @@ export const Unit = () => {
           >
             צור בקשה חדשה
           </button>
-        </>
+        </span>
       )}
     </div>
   );

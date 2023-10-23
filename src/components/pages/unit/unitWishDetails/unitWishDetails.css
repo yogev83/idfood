@@ -1,3 +1,29 @@
+.unit-wish-details > span {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.unit-wish-details > span > button {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: var(--spacing-small) var(--spacing-large);
+  border-radius: var(--border-radius-medium);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-right: var(--spacing-small);
+}
+
+.unit-wish-details > span > button:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
 /* Styles for the overlay */
 .popup-overlay {
   position: fixed;

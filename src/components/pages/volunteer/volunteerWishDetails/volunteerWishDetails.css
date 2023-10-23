@@ -1,18 +1,11 @@
-.unit-page {
+.volunteer-wish-details span {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: var(--padding);
-  background-color: var(--background-color);
-  color: var(--text-color);
+  gap: var(--spacing-small);
+  padding: 1em 0;
 }
 
-.unit-page h2 {
-  margin-bottom: var(--spacing-large);
-}
-
-.unit-page button {
+.volunteer-wish-details span button {
   display: inline-block;
   background-color: var(--primary-color);
   color: var(--secondary-color);
@@ -26,12 +19,7 @@
   transition: background-color 0.3s ease;
 }
 
-.unit-page button:hover {
+.volunteer-wish-details span button:hover {
   background-color: var(--secondary-color);
   color: var(--primary-color);
-}
-
-.unit-page span {
-  display: flex;
-  flex-direction: column;
 }

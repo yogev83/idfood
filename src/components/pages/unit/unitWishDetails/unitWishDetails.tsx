@@ -80,15 +80,16 @@ export const UnitWishDetails = ({ wish }: { wish: WishDetailsProps }) => {
   };
 
   return (
-    <div>
-      <h2>הבקשה הפעילה שלכם</h2>
+    <div className="unit-wish-details">
       <WishDetails {...wish} />
-      {/* Conditionally render the button based on wish.status */}
-      {!wish.maker && !wish.deliverer ? (
-        <button onClick={() => setShowCancelPopup(true)}>בטל</button>
-      ) : wish.status === "Active" ? (
-        <button onClick={() => setShowDonePopup(true)}>התקבל</button>
-      ) : null}
+
+      <span>
+        {!wish.maker && !wish.deliverer ? (
+          <button onClick={() => setShowCancelPopup(true)}>בטל</button>
+        ) : wish.status === "Active" ? (
+          <button onClick={() => setShowDonePopup(true)}>התקבל</button>
+        ) : null}
+      </span>
 
       {/* Cancel Popup */}
       {showCancelPopup && (

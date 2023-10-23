@@ -6,6 +6,8 @@ import {
 import { UserContext } from "../../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 
+import "./volunteerWishDetails.css";
+
 export const VolunteerWishDetails = ({
   wishDetails,
 }: {
@@ -52,18 +54,18 @@ export const VolunteerWishDetails = ({
   const { status, maker, deliverer } = wishDetails;
 
   return (
-    <>
+    <div className="volunteer-wish-details">
       <WishDetails {...wishDetails} />
       {status === "Open" && (!maker || !deliverer) && (
-        <>
+        <span>
           {!maker && (
             <button onClick={() => handleWish("maker")}>אני במטבח!</button>
           )}
           {!deliverer && (
             <button onClick={() => handleWish("deliverer")}>אני אקח!</button>
           )}
-        </>
+        </span>
       )}
-    </>
+    </div>
   );
 };
