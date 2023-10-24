@@ -1,19 +1,7 @@
 .wish-card {
-  width: 100%;
-  max-width: 300px;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 16px;
 }
 
-.wish-card img {
-  width: 100%;
-  height: auto;
-}
-
-@media (min-width: 900px) {
-  .wish-card {
-    width: calc(100% / 3 - 20px);
-  }
+.wish-card .wish-card-location {
+  margin-right: 12px;
 }
