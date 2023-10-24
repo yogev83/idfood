@@ -3,10 +3,8 @@ import {
   Body1Strong,
   Caption1,
   Card,
-  CardFooter,
   CardHeader,
   CardPreview,
-  Title2,
   Title3,
 } from "@fluentui/react-components";
 import "./wishCard.css"; // Import your CSS file
