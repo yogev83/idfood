@@ -9,7 +9,7 @@ export interface WishDetailsProps {
   dish: string;
   numSoldiers: number;
   location: string;
-  specialWishs?: string;
+  specialRequests?: string;
   about?: string;
   imageURL?: string;
 }
@@ -21,7 +21,7 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
     dish,
     numSoldiers,
     location,
-    specialWishs,
+    specialRequests,
     about,
     imageURL,
   }: WishDetailsProps = wishDetails;
@@ -37,7 +37,7 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
       <p>המנה: {dish}</p>
       <p>מספר חיילים: {numSoldiers}</p>
       <p>מיקום: {location}</p>
-      {specialWishs && <p>בקשות מיוחדות: {specialWishs}</p>}
+      {specialRequests && <p>בקשות מיוחדות: {specialRequests}</p>}
       {about && <p>פרטים נוספים: {about}</p>}
       {
         <img

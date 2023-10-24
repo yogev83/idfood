@@ -8,27 +8,10 @@
   color: var(--text-color);
 }
 
-.unit-page h2 {
-  margin-bottom: var(--spacing-large);
-}
-
-.unit-page button {
-  display: inline-block;
+.unit-page .new-wish-button {
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  padding: var(--spacing-small) var(--spacing-large);
-  border-radius: var(--border-radius-medium);
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1em;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.unit-page button:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  margin-top: 20px;
 }
 
 .unit-page span {

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UnitWishDetails } from "./unitWishDetails/unitWishDetails";
 
 import "./unit.css"; // Import your CSS file
+import { Button, Title2 } from "@fluentui/react-components";
 
 export const Unit = () => {
   const { user } = useContext(UserContext);
@@ -39,13 +40,13 @@ export const Unit = () => {
         <UnitWishDetails wish={activeWish} />
       ) : (
         <span>
-          <h2>אין לכם בקשות פעילות</h2>
-          <button
+          <Title2>אין לכם בקשות פעילות</Title2>
+          <Button
             onClick={() => setShowNewWish(true)}
             className="new-wish-button"
           >
             צור בקשה חדשה
-          </button>
+          </Button>
         </span>
       )}
     </div>

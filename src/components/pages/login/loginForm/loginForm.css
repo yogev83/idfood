@@ -4,18 +4,15 @@
   align-items: center;
 }
 
-.login-form input {
+.login-form .login-input {
   margin-bottom: 10px;
 }
 
 .login-form button {
   margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  border: none;
-  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  width: 150px;
 }
 
 .login-form a {

@@ -6,24 +6,22 @@
   background-size: cover;
 }
 
-.login-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: var(--secondary-color);
-  color: var(--p);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+.login-page span.button-group {
+  display: flex;
 }
 
-.unit-login {
+.login-page .login-button {
+  margin: 50px 5px;
+  width: 150px;
+}
+
+.login-page .unit-login {
   /* Change to blue color */
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
-.volunteer-login {
+.login-page .volunteer-login {
   /* Change to red color */
   background-color: var(--primary-color);
   color: var(--secondary-color);

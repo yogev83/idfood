@@ -4,6 +4,8 @@ import { UserContext } from "../../../app/userContext/userContext";
 import { loginWithToken } from "./loginService";
 import { LoginForm } from "./loginForm/loginForm";
 
+import { Button, Title2 } from "@fluentui/react-components";
+
 import "./login.css";
 
 export const Login: React.FC = () => {
@@ -40,16 +42,22 @@ export const Login: React.FC = () => {
         <LoginForm loginType={loginType} />
       ) : (
         <>
-          <h1>התחברו בתור</h1>
-          <button onClick={handleUnitLogin} className="login-button unit-login">
-            חיילים רעבים
-          </button>
-          <button
-            onClick={handleVolunteerLogin}
-            className="login-button volunteer-login"
-          >
-            אזרחים מתנדבים
-          </button>
+          <Title2>התחברו בתור</Title2>
+          <span className="button-group">
+            {" "}
+            <Button
+              onClick={handleUnitLogin}
+              className="login-button unit-login"
+            >
+              חיילים רעבים
+            </Button>
+            <Button
+              onClick={handleVolunteerLogin}
+              className="login-button volunteer-login"
+            >
+              אזרחים מתנדבים
+            </Button>
+          </span>
         </>
       )}
     </div>

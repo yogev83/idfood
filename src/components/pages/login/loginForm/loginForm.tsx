@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginAsUnit, loginAsVolunteer } from "../loginService";
 import "./loginForm.css";
 import { UserContext } from "../../../../app/userContext/userContext";
+import { Button, Input } from "@fluentui/react-components";
 
 interface LoginFormProps {
   loginType: string;
@@ -47,21 +48,23 @@ export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
-      <input
+      <Input
+        className="login-input"
         type="text"
         placeholder={loginType === "unit" ? "שם היחידה" : "שם משתמש"}
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <input
+      <Input
+        className="login-input"
         type="password"
         placeholder="סיסמא"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       {error && <div className="error">{error}</div>}
-      <button type="submit">התחבר</button>
-      <button>משתמשים חדשים</button>
+      <Button type="submit">התחבר</Button>
+      <Button as="a">משתמשים חדשים</Button>
     </form>
   );
 };
