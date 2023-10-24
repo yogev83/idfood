@@ -1,9 +1,9 @@
 import { useContext, useState, useRef, useEffect } from "react";
 import { UserContext } from "../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
+import { Menu } from "./menu/menu";
 
 import "./header.css";
-import { Menu } from "./menu/menu";
 
 export const Header = () => {
   const { user } = useContext(UserContext);
