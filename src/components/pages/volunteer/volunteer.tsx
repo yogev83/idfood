@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../app/userContext/userContext";
 import { VolunteerDashboard } from "./volunteerDashboard/volunteerDahsboard";
 
+import "./volunteer.css";
+
 export const Volunteer = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate(); // Access navigate

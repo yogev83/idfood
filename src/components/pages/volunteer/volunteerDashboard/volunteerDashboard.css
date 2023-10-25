@@ -9,51 +9,13 @@
   margin-bottom: var(--spacing-large);
 }
 
-.tab {
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.tab button {
-  background-color: inherit;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: var(--spacing-small);
-  flex-grow: 1;
-  text-align: center;
-}
-
-.tab button:hover {
-  background-color: var(--secondary-color);
-}
-
-.tab button.active:not(:disabled) {
+.volunteer-dashboard .open-wishs-button {
+  margin-top: 20px;
   background-color: var(--primary-color);
   color: var(--secondary-color);
 }
 
-.tab button[disabled] {
-  color: grey;
-}
-
-.open-wishs-button {
-  padding: var(--spacing-small);
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border-radius: var(--border-radius-medium);
-
-  /* Add hover effect */
-  transition: background-color 0.3s ease;
-}
-
-.open-wishs-button:hover {
+.volunteer-dashboard .open-wishs-button:hover {
   background-color: var(--secondary-color);
   color: var(--primary-color);
-}
-
-.volunteer-page {
-  padding: var(--spacing-large);
 }

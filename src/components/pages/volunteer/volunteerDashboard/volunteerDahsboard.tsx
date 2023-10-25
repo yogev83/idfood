@@ -1,9 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { WishDetailsProps } from "../../../wishDetails/wishDetails";
 import { UserContext } from "../../../../app/userContext/userContext";
 
-import "./volunteerDashboard.css";
 import { WishCard } from "../wishCard/wishCard";
+import { Button, Tab, TabList, Title3 } from "@fluentui/react-components";
+
+import "./volunteerDashboard.css";
 
 export const VolunteerDashboard = ({
   showOpenWishs,
@@ -13,10 +15,29 @@ export const VolunteerDashboard = ({
   handleWishClick: (wish: WishDetailsProps) => void;
 }) => {
   const [wishs, setWishs] = useState<WishDetailsProps[]>([]);
-  const [activeTab, setActiveTab] = useState("toMake");
+  const [activeTab, setActiveTab] = useState<string | null>(null);
   const { user } = useContext(UserContext);
 
   const sessionToken = sessionStorage.getItem("sessionToken");
+
+  const filteredWishs = useMemo(
+    () =>
+      wishs.filter((wish) =>
+        activeTab === "toMake"
+          ? wish.maker === user?.id
+          : wish.deliverer === user?.id
+      ),
+    [activeTab, user?.id, wishs]
+  );
+
+  const isMaker = useMemo(
+    () => wishs.some((wish) => wish.maker === user?.id),
+    [user?.id, wishs]
+  );
+  const isDeliverer = useMemo(
+    () => wishs.some((wish) => wish.deliverer === user?.id),
+    [user?.id, wishs]
+  );
 
   useEffect(() => {
     if (!user) {
@@ -34,35 +55,33 @@ export const VolunteerDashboard = ({
       .catch((error) => console.error("Error:", error));
   }, [sessionToken, user]);
 
+  useEffect(() => {
+    if (isMaker) {
+      setActiveTab("toMake");
+    } else if (isDeliverer) {
+      setActiveTab("toDeliverer");
+    }
+  }, [isDeliverer, isMaker]);
+
   if (!user) {
     return null;
   }
 
-  const filteredWishs = wishs.filter((wish) =>
-    activeTab === "toMake" ? wish.maker === user.id : wish.deliverer === user.id
-  );
-
-  const isMaker = wishs.some((wish) => wish.maker === user.id);
-  const isDeliverer = wishs.some((wish) => wish.deliverer === user.id);
-
   return (
     <div className="volunteer-dashboard">
-      <div className="tab">
-        <button
-          className={`tablinks ${activeTab === "toMake" ? "active" : ""}`}
-          onClick={() => setActiveTab("toMake")}
-          disabled={!isMaker}
-        >
+      <TabList
+        selectedValue={activeTab}
+        onTabSelect={(e) => {
+          setActiveTab((e.currentTarget as HTMLInputElement).value);
+        }}
+      >
+        <Tab value="toMake" disabled={!isMaker}>
           להכנה
-        </button>
-        <button
-          className={`tablinks ${activeTab === "toDeliver" ? "active" : ""}`}
-          onClick={() => setActiveTab("toDeliver")}
-          disabled={!isDeliverer}
-        >
+        </Tab>
+        <Tab value="toDeliver" disabled={!isDeliverer}>
           למשלוח
-        </button>
-      </div>
+        </Tab>
+      </TabList>
       {filteredWishs.length > 0 ? (
         filteredWishs.map((wish) => (
           <div key={wish.id}>
@@ -77,13 +96,11 @@ export const VolunteerDashboard = ({
           </div>
         ))
       ) : (
-        <div>
-          <p>אין לכם בקשות בהמתנה</p>
-        </div>
+        <Title3>אין לכם בקשות בהמתנה</Title3>
       )}
-      <button className="open-wishs-button" onClick={showOpenWishs}>
+      <Button className="open-wishs-button" onClick={showOpenWishs}>
         בקשות מהשטח
-      </button>
+      </Button>
     </div>
   );
 };

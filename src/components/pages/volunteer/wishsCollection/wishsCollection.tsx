@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { WishCard } from "../wishCard/wishCard";
 import { WishDetailsProps } from "../../../wishDetails/wishDetails";
+import { Title3 } from "@fluentui/react-components";
 
 export const WishsCollection = ({
   handleWishClick,
@@ -30,7 +31,7 @@ export const WishsCollection = ({
 
   return (
     <>
-      <h1>בקשות מהשטח</h1>
+      <Title3>בקשות מהשטח</Title3>
       <div className="wish-grid">
         {Array.isArray(wishs) &&
           wishs.map((wish, index) => (
