@@ -17,8 +17,8 @@
 
 .login-page .unit-login {
   /* Change to blue color */
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
 }
 
 .login-page .volunteer-login {

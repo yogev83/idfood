@@ -1,3 +1,10 @@
+import {
+  Badge,
+  Body1,
+  Subtitle2,
+  Title2,
+  Title3,
+} from "@fluentui/react-components";
 import "./wishDetails.css"; // Import your CSS file
 
 export interface WishDetailsProps {
@@ -26,24 +33,37 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
     imageURL,
   }: WishDetailsProps = wishDetails;
 
-  console.log("imageURL: " + imageURL);
-
   return (
-    <div className="wish-details">
-      <h1>פרטי הבקשה</h1>
-      <h3>{!maker || !deliverer ? "בקשה בהמתנה למתנדבים" : "בקשה בטיפול"}</h3>
-      <p>המנה: {dish}</p>
-      <p>מספר חיילים: {numSoldiers}</p>
-      <p>מיקום: {location}</p>
-      {specialRequests && <p>בקשות מיוחדות: {specialRequests}</p>}
-      {about && <p>פרטים נוספים: {about}</p>}
-      {
-        <img
-          src={imageURL || "avatar.jpeg"}
-          alt="Preview"
-          style={{ width: "100%" }}
-        />
-      }
+    <div className="wish-details" dir="rtl">
+      <Title2>פרטי הבקשה</Title2>
+      <br />
+      <Badge
+        className="status-badge"
+        size="small"
+        color={!maker || !deliverer ? "warning" : "brand"}
+      >
+        {!maker || !deliverer ? "בקשה בהמתנה למתנדבים" : "בקשה בטיפול"}
+      </Badge>
+      <br />
+      <Body1>המנה: {dish}</Body1>
+      <br />
+      <Body1>מספר חיילים: {numSoldiers}</Body1>
+      <br />
+      <Body1>מיקום: {location}</Body1>
+      <br />
+      {specialRequests && (
+        <>
+          <Body1>בקשות מיוחדות: {specialRequests}</Body1>
+          <br />
+        </>
+      )}
+      {about && (
+        <>
+          <Body1>פרטים נוספים: {about}</Body1>
+          <br />
+        </>
+      )}
+      {<img src={imageURL || "/avatar.jpeg"} alt="Preview" />}
     </div>
   );
 };

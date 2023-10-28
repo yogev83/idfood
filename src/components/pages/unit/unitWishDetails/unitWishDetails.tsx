@@ -9,6 +9,11 @@ import {
 import { User, UserContext } from "../../../../app/userContext/userContext";
 
 import "./unitWishDetails.css";
+import {
+  CheckmarkCircle24Regular,
+  RecordStop24Regular,
+} from "@fluentui/react-icons";
+import { Button, Label } from "@fluentui/react-components";
 
 export const UnitWishDetails = ({
   wishDetails,
@@ -85,15 +90,23 @@ export const UnitWishDetails = ({
 
   return (
     <div className="unit-wish-details">
+      {!wishDetails.maker && !wishDetails.deliverer && (
+        <div className="action-icon">
+          <RecordStop24Regular onClick={() => setShowCancelPopup(true)} />
+          <Label className="action-label">בטל</Label>
+        </div>
+      )}
       <WishDetails {...wishDetails} />
-
-      <span>
-        {!wishDetails.maker && !wishDetails.deliverer ? (
-          <button onClick={() => setShowCancelPopup(true)}>בטל</button>
-        ) : wishDetails.status === "Active" ? (
-          <button onClick={() => setShowDonePopup(true)}>התקבל</button>
-        ) : null}
-      </span>
+      {wishDetails.status === "Active" && (
+        <Button
+          appearance="primary"
+          className="done-button"
+          icon={<CheckmarkCircle24Regular />}
+          onClick={() => setShowDonePopup(true)}
+        >
+          התקבלה
+        </Button>
+      )}
 
       {/* Cancel Popup */}
       {showCancelPopup && (

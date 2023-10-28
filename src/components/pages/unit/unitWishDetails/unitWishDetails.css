@@ -1,27 +1,29 @@
-.unit-wish-details > span {
-  display: flex;
-  justify-content: center;
-  padding: 1em 0;
+.unit-wish-details {
+  position: relative;
+  height: 100vh;
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
+  padding: 20px;
 }
 
-.unit-wish-details > span > button {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  padding: var(--spacing-small) var(--spacing-large);
-  border-radius: var(--border-radius-medium);
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1em;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  margin-right: var(--spacing-small);
+.unit-wish-details .action-icon {
+  position: absolute;
+  display: flex;
+}
+
+.unit-wish-details .action-icon .action-label {
+  color: var(--accent-text-color);
+  margin-left: 5px;
 }
 
 .unit-wish-details > span > button:hover {
   background-color: var(--secondary-color);
   color: var(--primary-color);
+}
+
+.done-button {
+  width: 100%;
+  margin-top: 12px;
 }
 
 /* Styles for the overlay */
@@ -65,7 +67,7 @@
 }
 
 .popup-content button:hover {
-  background: var(--background-color); /* Button background color on hover */
+  background: var(--accent-color); /* Button background color on hover */
 }
 
 /* Close button styles */

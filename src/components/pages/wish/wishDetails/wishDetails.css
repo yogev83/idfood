@@ -1,11 +1,13 @@
 .wish-details {
   direction: rtl;
-  background-color: #4b5320;
-  color: #ffdb58;
-  padding: 20px;
-  border-radius: 10px;
+  text-align: right; /* Add this line */
 }
 
-.wish-details p {
-  margin-bottom: 10px;
+.wish-details .status-badge {
+  margin: 12px 0;
+}
+
+.wish-details img {
+  margin-top: 12px;
+  width: 100%;
 }

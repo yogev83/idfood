@@ -1,7 +1,7 @@
 .new-wish-form {
   direction: rtl;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
   padding: var(--padding);
   border-radius: var(--border-radius);
   display: flex;

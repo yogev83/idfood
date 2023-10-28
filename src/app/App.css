@@ -1,8 +1,8 @@
 :root {
   --primary-color: #0038b8; /* Blue */
   --secondary-color: #ffffff; /* White */
-  --background-color: #4b5320;
-  --text-color: #ffdb58;
+  --accent-color: #4b5320;
+  --accent-text-color: #ffdb58;
   --padding: 20px;
   --border-radius: 10px;
   --margin-bottom: 10px;
