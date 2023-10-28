@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { WishDetailsProps } from "../../wishDetails/wishDetails";
+import { WishDetailsProps } from "../wish/wishDetails/wishDetails";
 import { NewWish } from "./newWish/newWish";
 import { UserContext } from "../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ export const Unit = () => {
       {showNewWish ? (
         <NewWish />
       ) : activeWish ? (
-        <UnitWishDetails wish={activeWish} />
+        <UnitWishDetails wishDetails={activeWish} />
       ) : (
         <span>
           <Title2>אין לכם בקשות פעילות</Title2>

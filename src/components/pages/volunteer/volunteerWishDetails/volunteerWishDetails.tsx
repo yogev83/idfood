@@ -2,7 +2,7 @@ import { useContext } from "react";
 import {
   WishDetails,
   WishDetailsProps,
-} from "../../../wishDetails/wishDetails";
+} from "../../wish/wishDetails/wishDetails";
 import { UserContext } from "../../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 

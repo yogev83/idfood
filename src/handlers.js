@@ -131,6 +131,32 @@ export const handlers = [
     return res(ctx.status(201), ctx.json(users[currentUserId]));
   }),
 
+  rest.get("/api/wishs/:id", (req, res, ctx) => {
+    // Get the session token from the wish headers
+    const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
+
+    // Check if there is a logged-in user and if their session token matches the one from the wish
+    const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
+
+    if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
+      return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
+    }
+
+    const wishs = JSON.parse(sessionStorage.getItem("backend/wishs")) || {};
+
+    // Get the wish id from the request parameters
+    const wishId = req.params.id;
+
+    // Find the wish by its id
+    const wish = wishs[wishId];
+
+    if (!wish) {
+      return res(ctx.status(404), ctx.json({ error: "Wish not found" }));
+    }
+
+    return res(ctx.status(200), ctx.json(wish));
+  }),
+
   rest.put("/api/wishs/:wishId", async (req, res, ctx) => {
     // Get the session token from the wish headers
     const sessionToken = req.headers.get("Authorization")?.split(" ")[1];

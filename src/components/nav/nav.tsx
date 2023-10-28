@@ -4,10 +4,16 @@ import { useEffect } from "react";
 import { Login } from "../pages/login/login";
 import { Unit } from "../pages/unit/unit";
 import { Volunteer } from "../pages/volunteer/volunteer";
+import { withWishDetails } from "../pages/wish/withWishDetails";
+import { VolunteerWishDetails } from "../pages/volunteer/volunteerWishDetails/volunteerWishDetails";
+import { UnitWishDetails } from "../pages/unit/unitWishDetails/unitWishDetails";
 //import { NewWish } from "../pages/unit/newWish/newWish";
 
 export const Nav = () => {
   //const navigate = useNavigate();
+
+  const VolunteerWishDetailsHOC = () => withWishDetails(VolunteerWishDetails)();
+  const UnitWishDetailsHOC = () => withWishDetails(UnitWishDetails)();
 
   useEffect(() => {
     // const user = checkUser(); // Replace this with your actual check user logic
@@ -25,6 +31,8 @@ export const Nav = () => {
       <Route path="/" element={<Login />} />
       <Route path="/unit" element={<Unit />} />
       <Route path="/volunteer" element={<Volunteer />} />
+      <Route path="/volunteer/wish/:id" element={<VolunteerWishDetailsHOC />} />
+      <Route path="/unit/wish/:id" element={<UnitWishDetailsHOC />} />
     </Routes>
   );
 };

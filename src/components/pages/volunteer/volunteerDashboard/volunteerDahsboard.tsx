@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { WishDetailsProps } from "../../../wishDetails/wishDetails";
+import { WishDetailsProps } from "../../wish/wishDetails/wishDetails";
 import { UserContext } from "../../../../app/userContext/userContext";
 
 import { WishCard } from "../wishCard/wishCard";

@@ -1,5 +1,17 @@
 .wish-card {
   margin: 16px;
+  padding-top: 0 !important;
+  flex-direction: row-reverse !important;
+  align-items: flex-end;
+}
+
+.wish-card .wish-card-header {
+  flex: 2;
+  padding: 0 12px;
+}
+
+.wish-card .wish-card-preview {
+  flex: 1;
 }
 
 .wish-card .wish-card-location {

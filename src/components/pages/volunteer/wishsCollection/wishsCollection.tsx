@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { WishCard } from "../wishCard/wishCard";
-import { WishDetailsProps } from "../../../wishDetails/wishDetails";
+import { WishDetailsProps } from "../../wish/wishDetails/wishDetails";
 import { Title3 } from "@fluentui/react-components";
+
+import "./wishCollection.css";
 
 export const WishsCollection = ({
   handleWishClick,
@@ -30,7 +32,7 @@ export const WishsCollection = ({
   }, []);
 
   return (
-    <>
+    <div className="wish-collection" dir="rtl">
       <Title3>בקשות מהשטח</Title3>
       <div className="wish-grid">
         {Array.isArray(wishs) &&
@@ -42,6 +44,6 @@ export const WishsCollection = ({
             />
           ))}
       </div>
-    </>
+    </div>
   );
 };

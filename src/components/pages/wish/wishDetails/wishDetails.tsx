@@ -26,9 +26,7 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
     imageURL,
   }: WishDetailsProps = wishDetails;
 
-  if (!wishDetails) {
-    return <div>Loading...</div>; // Show loading state while fetching wish details
-  }
+  console.log("imageURL: " + imageURL);
 
   return (
     <div className="wish-details">

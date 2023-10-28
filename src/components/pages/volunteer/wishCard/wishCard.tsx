@@ -27,6 +27,7 @@ export const WishCard = ({
   return (
     <Card className="wish-card" onClick={() => onClick(id)} dir="rtl">
       <CardHeader
+        className="wish-card-header"
         header={<Title3>{dish}</Title3>}
         description={
           <Caption1>
@@ -35,8 +36,8 @@ export const WishCard = ({
           </Caption1>
         }
       />
-      <CardPreview>
-        <img src={imageURL || "avatar.jpeg"} alt={dish} />
+      <CardPreview className="wish-card-preview">
+        <img src={imageURL || "/avatar.jpeg"} alt={dish} />
       </CardPreview>
     </Card>
   );

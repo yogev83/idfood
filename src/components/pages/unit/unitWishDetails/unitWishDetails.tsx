@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import {
   WishDetails,
   WishDetailsProps,
-} from "../../../wishDetails/wishDetails";
+} from "../../wish/wishDetails/wishDetails";
 
 import { User, UserContext } from "../../../../app/userContext/userContext";
 
 import "./unitWishDetails.css";
 
-export const UnitWishDetails = ({ wish }: { wish: WishDetailsProps }) => {
+export const UnitWishDetails = ({
+  wishDetails,
+}: {
+  wishDetails: WishDetailsProps;
+}) => {
   const navigate = useNavigate(); // Access navigate
   const { setUser, user } = useContext(UserContext);
 
@@ -18,13 +22,13 @@ export const UnitWishDetails = ({ wish }: { wish: WishDetailsProps }) => {
   const [showDonePopup, setShowDonePopup] = useState(false);
 
   const handleCancel = async () => {
-    if (!wish) {
+    if (!wishDetails) {
       return;
     }
 
     // Call your backend endpoint here
     try {
-      const response = await fetch(`/api/wishs/${wish.id}`, {
+      const response = await fetch(`/api/wishs/${wishDetails.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("sessionToken")}`,
@@ -48,13 +52,13 @@ export const UnitWishDetails = ({ wish }: { wish: WishDetailsProps }) => {
   };
 
   const handleDone = async () => {
-    if (!wish) {
+    if (!wishDetails) {
       return;
     }
 
     // Call your backend endpoint here
     try {
-      const response = await fetch(`/api/wishs/${wish.id}`, {
+      const response = await fetch(`/api/wishs/${wishDetails.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("sessionToken")}`,
@@ -81,12 +85,12 @@ export const UnitWishDetails = ({ wish }: { wish: WishDetailsProps }) => {
 
   return (
     <div className="unit-wish-details">
-      <WishDetails {...wish} />
+      <WishDetails {...wishDetails} />
 
       <span>
-        {!wish.maker && !wish.deliverer ? (
+        {!wishDetails.maker && !wishDetails.deliverer ? (
           <button onClick={() => setShowCancelPopup(true)}>בטל</button>
-        ) : wish.status === "Active" ? (
+        ) : wishDetails.status === "Active" ? (
           <button onClick={() => setShowDonePopup(true)}>התקבל</button>
         ) : null}
       </span>
