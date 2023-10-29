@@ -1,0 +1,22 @@
+.alternating-text-conteiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Add this line */
+}
+
+.alternating-text-conteiner.animate .alternating-text {
+  animation: slide-in-fwd-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-in-fwd-center {
+  0% {
+    transform: translateY(-1em);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
