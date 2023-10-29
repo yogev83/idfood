@@ -3,12 +3,11 @@
   --secondary-color: #ffffff; /* White */
   --accent-color: #4b5320;
   --accent-text-color: #ffdb58;
-  --padding: 20px;
   --border-radius: 10px;
-  --margin-bottom: 10px;
+  --border-radius-medium: 5px; /* Replace with your desired border radius */
   --spacing-small: 10px; /* Replace with your desired spacing */
   --spacing-large: 20px; /* Replace with your desired spacing */
-  --border-radius-medium: 5px; /* Replace with your desired border radius */
+  --label-margin: 3px;
 }
 
 .IDFood {

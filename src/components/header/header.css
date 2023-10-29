@@ -2,9 +2,9 @@
   display: flex;
   position: sticky;
   top: 0;
+  height: 50px;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   background-color: var(--secondary-color);
   color: var(--primary-color);
   z-index: 999;
@@ -29,7 +29,7 @@
 }
 
 .logo {
-  width: 64px; /* Adjust the width and height to your preference */
+  width: 50px; /* Adjust the width and height to your preference */
   cursor: pointer;
 }
 

@@ -55,7 +55,7 @@ export const VolunteerWishDetails = ({
 
   return (
     <div className="volunteer-wish-details">
-      <WishDetails {...wishDetails} />
+      <WishDetails wishDetails={wishDetails} />
       {status === "Open" && (!maker || !deliverer) && (
         <span>
           {!maker && (

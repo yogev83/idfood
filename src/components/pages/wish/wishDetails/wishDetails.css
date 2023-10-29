@@ -3,11 +3,11 @@
   text-align: right; /* Add this line */
 }
 
-.wish-details .status-badge {
-  margin: 12px 0;
+.wish-details-card-header {
+  display: flex;
+  align-items: baseline;
 }
 
-.wish-details img {
-  margin-top: 12px;
-  width: 100%;
+.wish-details-card-header .status-badge {
+  margin-right: var(--label-margin);
 }

@@ -13,7 +13,12 @@ import {
   CheckmarkCircle24Regular,
   RecordStop24Regular,
 } from "@fluentui/react-icons";
-import { Button, Label } from "@fluentui/react-components";
+import {
+  Button,
+  Caption1,
+  Caption1Strong,
+  Label,
+} from "@fluentui/react-components";
 
 export const UnitWishDetails = ({
   wishDetails,
@@ -90,23 +95,28 @@ export const UnitWishDetails = ({
 
   return (
     <div className="unit-wish-details">
-      {!wishDetails.maker && !wishDetails.deliverer && (
-        <div className="action-icon">
-          <RecordStop24Regular onClick={() => setShowCancelPopup(true)} />
-          <Label className="action-label">בטל</Label>
-        </div>
-      )}
-      <WishDetails {...wishDetails} />
-      {wishDetails.status === "Active" && (
-        <Button
-          appearance="primary"
-          className="done-button"
-          icon={<CheckmarkCircle24Regular />}
-          onClick={() => setShowDonePopup(true)}
-        >
-          התקבלה
-        </Button>
-      )}
+      <WishDetails wishDetails={wishDetails}>
+        {!wishDetails.maker && !wishDetails.deliverer && (
+          <Button
+            appearance="primary"
+            className="cancel-button"
+            icon={<RecordStop24Regular />}
+            onClick={() => setShowCancelPopup(true)}
+          >
+            <Caption1Strong className="action-caption">בטל</Caption1Strong>
+          </Button>
+        )}
+        {wishDetails.status === "Active" && (
+          <Button
+            appearance="primary"
+            className="done-button"
+            icon={<CheckmarkCircle24Regular />}
+            onClick={() => setShowDonePopup(true)}
+          >
+            <Caption1Strong className="action-caption">התקבלה</Caption1Strong>
+          </Button>
+        )}
+      </WishDetails>
 
       {/* Cancel Popup */}
       {showCancelPopup && (

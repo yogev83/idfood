@@ -2,7 +2,7 @@
   direction: rtl;
   background-color: var(--accent-color);
   color: var(--accent-text-color);
-  padding: var(--padding);
+  padding: 20px;
   border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;

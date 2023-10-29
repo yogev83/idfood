@@ -1,11 +1,14 @@
 import {
   Badge,
   Body1,
-  Subtitle2,
-  Title2,
+  Card,
+  CardFooter,
+  CardHeader,
+  CardPreview,
   Title3,
 } from "@fluentui/react-components";
 import "./wishDetails.css"; // Import your CSS file
+import { Children, ReactNode } from "react";
 
 export interface WishDetailsProps {
   id: string;
@@ -21,7 +24,13 @@ export interface WishDetailsProps {
   imageURL?: string;
 }
 
-export const WishDetails = (wishDetails: WishDetailsProps) => {
+export const WishDetails = ({
+  wishDetails,
+  children,
+}: {
+  wishDetails: WishDetailsProps;
+  children?: ReactNode;
+}) => {
   const {
     maker,
     deliverer,
@@ -34,36 +43,53 @@ export const WishDetails = (wishDetails: WishDetailsProps) => {
   }: WishDetailsProps = wishDetails;
 
   return (
-    <div className="wish-details" dir="rtl">
-      <Title2>פרטי הבקשה</Title2>
-      <br />
-      <Badge
-        className="status-badge"
-        size="small"
-        color={!maker || !deliverer ? "warning" : "brand"}
-      >
-        {!maker || !deliverer ? "בקשה בהמתנה למתנדבים" : "בקשה בטיפול"}
-      </Badge>
-      <br />
-      <Body1>המנה: {dish}</Body1>
-      <br />
-      <Body1>מספר חיילים: {numSoldiers}</Body1>
-      <br />
-      <Body1>מיקום: {location}</Body1>
-      <br />
-      {specialRequests && (
-        <>
-          <Body1>בקשות מיוחדות: {specialRequests}</Body1>
-          <br />
-        </>
-      )}
-      {about && (
-        <>
-          <Body1>פרטים נוספים: {about}</Body1>
-          <br />
-        </>
-      )}
-      {<img src={imageURL || "/avatar.jpeg"} alt="Preview" />}
-    </div>
+    <Card className="wish-details" dir="rtl">
+      <CardHeader
+        header={
+          <span className="wish-details-card-header">
+            <Title3>{dish}</Title3>
+            <Badge
+              className="status-badge"
+              size="small"
+              color={!maker || !deliverer ? "warning" : "brand"}
+            >
+              {!maker || !deliverer ? "בהמתנה למתנדבים" : "בטיפול"}
+            </Badge>
+          </span>
+        }
+        description={
+          <Body1>
+            <p>
+              <b>מספר חיילים: </b>
+              {numSoldiers}
+            </p>
+            <p>
+              <b>מיקום: </b>
+              {location}
+            </p>
+            {specialRequests && (
+              <>
+                <p>
+                  <b>בקשות מיוחדות: </b>
+                  {specialRequests}
+                </p>
+              </>
+            )}
+            {about && (
+              <>
+                <p>
+                  <b>פרטים נוספים: </b>
+                  {about}
+                </p>
+              </>
+            )}
+          </Body1>
+        }
+      />
+      <CardPreview>
+        {<img src={imageURL || "/avatar.jpeg"} alt="Preview" />}
+      </CardPreview>
+      <CardFooter>{children}</CardFooter>
+    </Card>
   );
 };

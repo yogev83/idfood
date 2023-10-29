@@ -9,11 +9,12 @@
 .unit-wish-details .action-icon {
   position: absolute;
   display: flex;
+  z-index: 1;
 }
 
 .unit-wish-details .action-icon .action-label {
   color: var(--accent-text-color);
-  margin-left: 5px;
+  margin-left: var(--label-margin);
 }
 
 .unit-wish-details > span > button:hover {
@@ -21,9 +22,9 @@
   color: var(--primary-color);
 }
 
-.done-button {
-  width: 100%;
-  margin-top: 12px;
+.cancel-button .action-caption,
+.done-button .action-caption {
+  margin-right: var(--label-margin);
 }
 
 /* Styles for the overlay */
@@ -50,7 +51,7 @@
   background: #fff; /* Background color for the modal */
   max-width: 90%; /* Adjust the maximum width as needed */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow for depth */
   text-align: center;
   position: relative; /* To center content within the modal */
