@@ -1,25 +1,8 @@
-.volunteer-wish-details span {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-small);
-  padding: 1em 0;
-}
-
-.volunteer-wish-details span button {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  padding: var(--spacing-small) var(--spacing-large);
-  border-radius: var(--border-radius-medium);
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1em;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.volunteer-wish-details span button:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+.volunteer-wish-details {
+  position: relative;
+  height: calc(100vh - 50px);
+  padding: 20px;
+  background: url("israel.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }

@@ -13,12 +13,7 @@ import {
   CheckmarkCircle24Regular,
   RecordStop24Regular,
 } from "@fluentui/react-icons";
-import {
-  Button,
-  Caption1,
-  Caption1Strong,
-  Label,
-} from "@fluentui/react-components";
+import { Button, Caption1Strong } from "@fluentui/react-components";
 
 export const UnitWishDetails = ({
   wishDetails,

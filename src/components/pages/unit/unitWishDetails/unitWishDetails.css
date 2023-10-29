@@ -1,6 +1,6 @@
 .unit-wish-details {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: var(--accent-color);
   color: var(--accent-text-color);
   padding: 20px;

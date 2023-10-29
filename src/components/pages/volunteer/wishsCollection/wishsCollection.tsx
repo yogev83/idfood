@@ -33,7 +33,6 @@ export const WishsCollection = ({
 
   return (
     <div className="wish-collection" dir="rtl">
-      <Title3>בקשות מהשטח</Title3>
       <div className="wish-grid">
         {Array.isArray(wishs) &&
           wishs.map((wish, index) => (
