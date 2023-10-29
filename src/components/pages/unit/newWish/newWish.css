@@ -1,49 +1,13 @@
-.new-wish-form {
-  direction: rtl;
-  background-color: var(--accent-color);
-  color: var(--accent-text-color);
+.new-wish {
   padding: 20px;
-  border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: right;
+  background: rgba(255, 255, 255, 0.6);
 }
 
-.new-wish-form h1 {
-  margin-bottom: var(--spacing-large);
+.new-wish-form {
+  margin-top: 16px;
 }
 
 .new-wish-form label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-bottom: var(--spacing-large);
-}
-
-.new-wish-form input,
-.new-wish-form select,
-.new-wish-form textarea {
-  width: 100%;
-  padding: var(--spacing-small);
-  margin-top: var(--spacing-small);
-  border-radius: var(--border-radius-medium);
-}
-
-.new-wish-form input[type="submit"] {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  padding: var(--spacing-small) var(--spacing-large);
-  border-radius: var(--border-radius-medium);
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.new-wish-form input[type="submit"]:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  text-align: right;
 }

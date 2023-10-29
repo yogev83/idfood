@@ -3,7 +3,7 @@ import { Caption1Stronger } from "@fluentui/react-components";
 
 import "./alternatingText.css";
 
-const LONG = 20000;
+const LONG = 12000;
 const SHORT = 1000;
 const ANIMATION = 300;
 

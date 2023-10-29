@@ -32,9 +32,10 @@ export const Unit = () => {
       {showNewWish ? (
         <NewWish />
       ) : (
-        <span>
+        <span className="unit-dashboard">
           <Title2>אין לכם בקשות פעילות</Title2>
           <Button
+            appearance="primary"
             onClick={() => setShowNewWish(true)}
             className="new-wish-button"
           >

@@ -1,15 +1,38 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { UserContext } from "../../../../app/userContext/userContext";
+import {
+  Checkbox,
+  Field,
+  Input,
+  Select,
+  Textarea,
+  Title2,
+} from "@fluentui/react-components";
 
 import "./newWish.css"; // Import your CSS file
+
+const LOCATIONS = [
+  "הקריות",
+  "אזור חיפה",
+  "צפון השרון",
+  "גוש דן",
+  "הגליל המערבי",
+  "השפלה",
+  "אזור באר-שבע",
+  "אזור ירושלים",
+  "חבל לכיש",
+  "עוטף עזה",
+  "אזור אילת",
+  "הערבה",
+];
 
 export const NewWish = () => {
   const [dish, setDish] = useState("");
   const [numSoldiers, setNumSoldiers] = useState("1");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState<string | null>(null);
-  const [specialWishs, setSpecialWishs] = useState("");
+  const [specialRequests, setSpecialRequests] = useState("");
   const [kosherOnly, setKosherOnly] = useState(false); // Add this line
 
   const navigate = useNavigate(); // Access navigate
@@ -25,7 +48,7 @@ export const NewWish = () => {
       numSoldiers,
       location,
       image,
-      specialWishs,
+      specialRequests,
       kosherOnly,
     };
 
@@ -59,21 +82,19 @@ export const NewWish = () => {
   };
 
   return (
-    <div className="new-wish-form">
-      <h1>בקשה חדשה</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          מנה:
-          <input
+    <div className="new-wish" dir="rtl">
+      <Title2 className="new-wish-title">בקשה חדשה</Title2>
+      <form onSubmit={handleSubmit} className="new-wish-form">
+        <Field label="מה בא לכם לאכול?">
+          <Input
             type="text"
-            placeholder="מה בא לכם לאכול?"
+            placeholder="שם המנה"
             value={dish}
             onChange={(e) => setDish(e.target.value)}
           />
-        </label>
-        <label>
-          מספר החיילים:
-          <select
+        </Field>
+        <Field label="כמה אתם?">
+          <Select
             value={numSoldiers}
             onChange={(e) => setNumSoldiers(e.target.value)}
           >
@@ -82,34 +103,41 @@ export const NewWish = () => {
                 {i + 1}
               </option>
             ))}
-          </select>
-        </label>
-        <label>
-          מיקום:
-          <input
-            type="text"
+          </Select>
+        </Field>
+        <Field label="איפה אתם?">
+          <Select
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-          />
-        </label>
-        <label>
-          {" "}
-          {/* Add this block */}
-          מטבח כשר בלבד:
-          <input
-            type="checkbox"
+          >
+            {LOCATIONS.map((v, i) => (
+              <option key={i} value={v}>
+                {v}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field label="מטבח כשר בלבד?">
+          <Checkbox
             checked={kosherOnly}
             onChange={(e) => setKosherOnly(e.target.checked)}
+          ></Checkbox>
+        </Field>
+        <Field label="בקשות מיוחדת?">
+          <Textarea
+            placeholder="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
+            value={specialRequests}
+            onChange={(e) => setSpecialRequests(e.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        {/* <label>
           בקשות מיוחדות:
           <textarea
             value={specialWishs}
             onChange={(e) => setSpecialWishs(e.target.value)}
             placeholder="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
           />
-        </label>
+        </label> */}
         <label>
           תמונה:
           <input type="file" onChange={handleImageUpload} />

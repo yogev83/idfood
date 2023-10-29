@@ -8,7 +8,7 @@ import {
   Title3,
 } from "@fluentui/react-components";
 import "./wishDetails.css"; // Import your CSS file
-import { Children, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface WishDetailsProps {
   id: string;
@@ -89,7 +89,7 @@ export const WishDetails = ({
       <CardPreview>
         {<img src={imageURL || "/avatar.jpeg"} alt="Preview" />}
       </CardPreview>
-      <CardFooter>{children}</CardFooter>
+      {children ? <CardFooter>{children}</CardFooter> : null}
     </Card>
   );
 };

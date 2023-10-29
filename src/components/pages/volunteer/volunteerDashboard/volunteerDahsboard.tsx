@@ -84,21 +84,24 @@ export const VolunteerDashboard = ({
       </TabList>
       {filteredWishs.length > 0 ? (
         filteredWishs.map((wish) => (
-          <div key={wish.id}>
-            <WishCard
-              id={wish.id}
-              dish={wish.dish}
-              unitName={wish.unitName}
-              location={wish.location}
-              imageURL={wish.imageURL}
-              onClick={() => handleWishClick(wish)}
-            />
-          </div>
+          <WishCard
+            key={wish.id}
+            id={wish.id}
+            dish={wish.dish}
+            unitName={wish.unitName}
+            location={wish.location}
+            imageURL={wish.imageURL}
+            onClick={() => handleWishClick(wish)}
+          />
         ))
       ) : (
         <Title3>אין לכם בקשות בהמתנה</Title3>
       )}
-      <Button className="open-wishs-button" onClick={showOpenWishs}>
+      <Button
+        appearance="primary"
+        className="open-wishs-button"
+        onClick={showOpenWishs}
+      >
         בקשות מהשטח
       </Button>
     </div>

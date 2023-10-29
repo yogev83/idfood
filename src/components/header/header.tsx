@@ -3,14 +3,10 @@ import { UserContext } from "../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "./menu/menu";
 
-import "./header.css";
-import {
-  Caption1,
-  Caption1Stronger,
-  Caption2,
-  Title3,
-} from "@fluentui/react-components";
+import { Caption1Strong, Caption1Stronger } from "@fluentui/react-components";
 import { AlternatingText } from "./alternatingText/alternatingText";
+
+import "./header.css";
 
 export const Header = () => {
   const { user } = useContext(UserContext);
@@ -49,10 +45,11 @@ export const Header = () => {
       <button className="menu-button" onClick={handleMenuClick}>
         ☰
       </button>
-      {user?.username && <h2>!{user.username} שלום</h2>}
-      <button className="close-button" onClick={() => navigate("/")}>
-        X
-      </button>
+      {user?.username && (
+        <Caption1Strong className="welcome">
+          !{user.username} שלום
+        </Caption1Strong>
+      )}
       {isMenuOpen && (
         <div
           ref={menuRef}
@@ -67,7 +64,7 @@ export const Header = () => {
         <AlternatingText />
         <Caption1Stronger>מי פנוי ל</Caption1Stronger>
         <img
-          src="/idfood.jpeg"
+          src="/idfood.png"
           alt="IDFood Logo"
           className="logo"
           onClick={() => navigate("/")}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { WishCard } from "../wishCard/wishCard";
 import { WishDetailsProps } from "../../wish/wishDetails/wishDetails";
-import { Title3 } from "@fluentui/react-components";
 
 import "./wishCollection.css";
 

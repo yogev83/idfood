@@ -2,19 +2,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: var(--accent-color);
-  color: var(--accent-text-color);
+  height: calc(100vh - 50px);
+  padding: var(--spacing-large);
+  background: url("idf.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.unit-page .unit-dashboard {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .unit-page .new-wish-button {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
   margin-top: 20px;
-}
-
-.unit-page span {
-  display: flex;
-  flex-direction: column;
 }

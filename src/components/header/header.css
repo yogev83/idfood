@@ -5,9 +5,13 @@
   height: 50px;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   z-index: 999;
+}
+
+.welcome {
+  margin-right: auto;
 }
 
 .logo-wrapper {
@@ -19,11 +23,10 @@
   margin-left: 3px;
 }
 
-.menu-button,
-.close-button {
+.menu-button {
   background-color: transparent;
   border: none;
-  color: var(--primary-color);
+  color: var(--secondary-color);
   font-size: 24px;
   margin-right: 10px; /* Add some spacing between the menu button and the logo */
 }

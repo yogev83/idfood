@@ -4,18 +4,3 @@
   align-items: center;
   border-radius: var(--border-radius-medium);
 }
-
-.volunteer-dashboard > div {
-  margin-bottom: var(--spacing-large);
-}
-
-.volunteer-dashboard .open-wishs-button {
-  margin-top: 20px;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-}
-
-.volunteer-dashboard .open-wishs-button:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}
