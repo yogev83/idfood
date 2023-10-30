@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginAsUnit, loginAsVolunteer } from "../loginService";
 import "./loginForm.css";
 import { UserContext } from "../../../../app/userContext/userContext";
-import { Button, Input } from "@fluentui/react-components";
+import { Button, Field, Input } from "@fluentui/react-components";
 
 interface LoginFormProps {
   loginType: string;
@@ -47,21 +47,25 @@ export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <Input
-        className="login-input"
-        type="text"
-        placeholder={loginType === "unit" ? "שם היחידה" : "שם משתמש"}
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <Input
-        className="login-input"
-        type="password"
-        placeholder="סיסמא"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+    <form className="login-form" onSubmit={handleSubmit} dir="rtl">
+      <Field label="שם משתמש" required>
+        <Input
+          className="login-input"
+          type="text"
+          placeholder={loginType === "unit" ? "שם היחידה" : "שם משתמש"}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Field>
+      <Field label="סיסמא" required>
+        <Input
+          type="password"
+          className="login-input"
+          placeholder="סיסמא"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Field>
       {error && <div className="error">{error}</div>}
       <Button type="submit">התחבר</Button>
       <Button as="a">משתמשים חדשים</Button>

@@ -1,0 +1,18 @@
+.completed-wish {
+  padding: var(--spacing-large);
+  height: calc(100vh - 50px);
+  padding: var(--spacing-large);
+  background: url("israel.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.completed-wish-card-sharing {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+.completed-wish-card-sharing-buttons {
+  padding: 8px;
+}

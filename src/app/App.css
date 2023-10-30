@@ -15,6 +15,11 @@
   background-color: var(--secondary-color);
 }
 
+.dialog-content {
+  direction: rtl;
+  text-align: right;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -3,7 +3,10 @@
   height: calc(100vh - 50px);
   background-color: var(--accent-color);
   color: var(--accent-text-color);
-  padding: 20px;
+  padding: var(--spacing-large);
+  background: url("idf.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .unit-wish-details .action-icon {
@@ -17,76 +20,7 @@
   margin-left: var(--label-margin);
 }
 
-.unit-wish-details > span > button:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}
-
 .cancel-button .action-caption,
 .done-button .action-caption {
   margin-right: var(--label-margin);
-}
-
-/* Styles for the overlay */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(
-    0,
-    0,
-    0,
-    0.6
-  ); /* Semi-transparent background to dim out the screen */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Ensure it's above other content */
-}
-
-/* Styles for the modal content */
-.popup-content {
-  background: #fff; /* Background color for the modal */
-  max-width: 90%; /* Adjust the maximum width as needed */
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow for depth */
-  text-align: center;
-  position: relative; /* To center content within the modal */
-}
-
-.popup-content button {
-  margin: 10px;
-  padding: 10px 20px;
-  background: var(--primary-color); /* Button background color */
-  color: #fff; /* Button text color */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.popup-content button:hover {
-  background: var(--accent-color); /* Button background color on hover */
-}
-
-/* Close button styles */
-.popup-content .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .popup-content {
-    max-width: 90%; /* Adjust as needed for smaller screens */
-  }
-}
-
-/* To hide the popup and overlay by default */
-.popup-hidden {
-  display: none;
 }

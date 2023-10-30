@@ -13,7 +13,17 @@ import {
   CheckmarkCircle24Regular,
   RecordStop24Regular,
 } from "@fluentui/react-icons";
-import { Button, Caption1Strong } from "@fluentui/react-components";
+import {
+  Body1Strong,
+  Button,
+  Caption1Strong,
+  Dialog,
+  DialogActions,
+  DialogBody,
+  DialogContent,
+  DialogSurface,
+  DialogTrigger,
+} from "@fluentui/react-components";
 
 export const UnitWishDetails = ({
   wishDetails,
@@ -24,7 +34,9 @@ export const UnitWishDetails = ({
   const { setUser, user } = useContext(UserContext);
 
   const [showCancelPopup, setShowCancelPopup] = useState(false);
-  const [showDonePopup, setShowDonePopup] = useState(false);
+  // const [showDonePopup, setShowDonePopup] = useState(false);
+
+  console.log("wishDetails", wishDetails);
 
   const handleCancel = async () => {
     if (!wishDetails) {
@@ -78,7 +90,7 @@ export const UnitWishDetails = ({
         setUser(newUser);
 
         // Navigate after user data has been updated
-        navigate("/");
+        navigate(`/unit/wish/${wishDetails.id}/thankyou`);
       } else {
         // Handle the case where the wish to change the status failed
       }
@@ -102,14 +114,36 @@ export const UnitWishDetails = ({
           </Button>
         )}
         {wishDetails.status === "Active" && (
-          <Button
-            appearance="primary"
-            className="done-button"
-            icon={<CheckmarkCircle24Regular />}
-            onClick={() => setShowDonePopup(true)}
-          >
-            <Caption1Strong className="action-caption">התקבלה</Caption1Strong>
-          </Button>
+          <Dialog modalType="alert">
+            <DialogTrigger disableButtonEnhancement>
+              <Button
+                appearance="primary"
+                className="done-button"
+                icon={<CheckmarkCircle24Regular />}
+              >
+                <Caption1Strong className="action-caption">
+                  התקבלה
+                </Caption1Strong>
+              </Button>
+            </DialogTrigger>
+            <DialogSurface>
+              <DialogBody>
+                <DialogContent className="dialog-content">
+                  <Body1Strong>קיבלתם את האוכל? איזה יופי!</Body1Strong>
+                </DialogContent>
+                <DialogActions>
+                  <DialogTrigger disableButtonEnhancement>
+                    <Button appearance="secondary">בעצם עוד לא</Button>
+                  </DialogTrigger>
+                  <DialogTrigger disableButtonEnhancement>
+                    <Button onClick={() => handleDone()} appearance="primary">
+                      אמרו תודה
+                    </Button>
+                  </DialogTrigger>
+                </DialogActions>
+              </DialogBody>
+            </DialogSurface>
+          </Dialog>
         )}
       </WishDetails>
 
@@ -133,7 +167,7 @@ export const UnitWishDetails = ({
       )}
 
       {/* Done Popup */}
-      {showDonePopup && (
+      {/* {showDonePopup && (
         <div className="popup-overlay" onClick={() => setShowDonePopup(false)}>
           <div className="popup-content">
             <div
@@ -146,7 +180,7 @@ export const UnitWishDetails = ({
             <button onClick={handleDone}>כן</button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

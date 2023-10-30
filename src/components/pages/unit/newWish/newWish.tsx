@@ -1,7 +1,12 @@
-import { useContext, useState } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { UserContext } from "../../../../app/userContext/userContext";
 import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  CardPreview,
   Checkbox,
   Field,
   Input,
@@ -11,6 +16,7 @@ import {
 } from "@fluentui/react-components";
 
 import "./newWish.css"; // Import your CSS file
+import { ImageLoader } from "../../../imageLoader/imageLoader";
 
 const LOCATIONS = [
   "הקריות",
@@ -35,12 +41,27 @@ export const NewWish = () => {
   const [specialRequests, setSpecialRequests] = useState("");
   const [kosherOnly, setKosherOnly] = useState(false); // Add this line
 
+  const [shouldShowDishError, setShouldShowDishError] = useState(false);
+  const [shouldShowLocationError, setShouldShowLocationError] = useState(false);
+
   const navigate = useNavigate(); // Access navigate
 
   const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
+    if (!dish) {
+      setShouldShowDishError(true);
+      alert("נא למלא את כל שדות החובה");
+      return;
+    }
+
+    if (!location) {
+      setShouldShowLocationError(true);
+      alert("נא למלא את כל שדות החובה");
+      return;
+    }
 
     // Create a new JavaScript object
     const newWish = {
@@ -75,76 +96,100 @@ export const NewWish = () => {
     navigate("/unit"); // Navigate back to the Unit page
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setImage(URL.createObjectURL(event.target.files[0]));
-    }
-  };
-
   return (
-    <div className="new-wish" dir="rtl">
-      <Title2 className="new-wish-title">בקשה חדשה</Title2>
-      <form onSubmit={handleSubmit} className="new-wish-form">
-        <Field label="מה בא לכם לאכול?">
-          <Input
-            type="text"
-            placeholder="שם המנה"
-            value={dish}
-            onChange={(e) => setDish(e.target.value)}
-          />
-        </Field>
-        <Field label="כמה אתם?">
-          <Select
-            value={numSoldiers}
-            onChange={(e) => setNumSoldiers(e.target.value)}
+    <Card className="new-wish" dir="rtl">
+      <CardHeader
+        header={<Title2 className="new-wish-title">בקשה חדשה</Title2>}
+      />
+      <CardPreview className="new-wish-card-preview">
+        <form onSubmit={handleSubmit} className="new-wish-form">
+          <Field
+            label="מה בא לכם לאכול?"
+            required
+            validationMessage="אם לא תספרו לנו, איך נדע?"
+            validationMessageIcon={null}
+            validationState={shouldShowDishError && !dish ? "error" : "none"}
           >
-            {Array.from(Array(10).keys()).map((i) => (
-              <option key={i + 1} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-          </Select>
-        </Field>
-        <Field label="איפה אתם?">
-          <Select
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            <Input
+              required
+              type="text"
+              placeholder="ג'חנון עם ביצה"
+              value={dish}
+              onChange={(e) => {
+                setDish(e.target.value);
+                setShouldShowDishError(true);
+              }}
+            />
+          </Field>
+          <Field label="כמה אתם?">
+            <Select
+              value={numSoldiers}
+              onChange={(e) => setNumSoldiers(e.target.value)}
+            >
+              {Array.from(Array(10).keys()).map((i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <Field
+            label="איפה אתם?"
+            required
+            defaultValue={"הקריות"}
+            validationMessage="אם לא תספרו לנו, איך נדע?"
+            validationMessageIcon={null}
+            validationState={
+              shouldShowLocationError && !dish ? "error" : "none"
+            }
           >
-            {LOCATIONS.map((v, i) => (
-              <option key={i} value={v}>
-                {v}
-              </option>
-            ))}
-          </Select>
-        </Field>
-        <Field label="מטבח כשר בלבד?">
+            <Select
+              value={location}
+              onChange={(e) => {
+                setLocation(e.target.value);
+                setShouldShowLocationError(true);
+              }}
+            >
+              {LOCATIONS.map((v, i) => (
+                <option key={i} value={v}>
+                  {v}
+                </option>
+              ))}
+            </Select>
+          </Field>
           <Checkbox
+            className="kosher-checkbox"
+            label={"מטבח כשר בלבד?"}
             checked={kosherOnly}
-            onChange={(e) => setKosherOnly(e.target.checked)}
-          ></Checkbox>
-        </Field>
-        <Field label="בקשות מיוחדת?">
-          <Textarea
-            placeholder="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
-            value={specialRequests}
-            onChange={(e) => setSpecialRequests(e.target.value)}
+            onChange={() => setKosherOnly(!kosherOnly)}
           />
-        </Field>
-        {/* <label>
-          בקשות מיוחדות:
-          <textarea
-            value={specialWishs}
-            onChange={(e) => setSpecialWishs(e.target.value)}
-            placeholder="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
+          <Field
+            label="בקשות מיוחדת?"
+            hint="זה המקום לכתוב אם אתה רגישים לגלוטן, צמחוניים, לא מסוגלים להתמודד עם חריף, וכו'"
+          >
+            <Textarea
+              placeholder="נשמח להרבה רסק"
+              value={specialRequests}
+              onChange={(e) => setSpecialRequests(e.target.value)}
+            />
+          </Field>
+          <ImageLoader
+            onChange={(image: SetStateAction<string | null>) => setImage(image)}
           />
-        </label> */}
-        <label>
-          תמונה:
-          <input type="file" onChange={handleImageUpload} />
-          {image && <img src={image} alt="Preview" />}
-        </label>
-        <input type="submit" value="שלח" />
-      </form>
-    </div>
+        </form>
+      </CardPreview>
+      <CardFooter>
+        <Button type="button" appearance="primary" onClick={handleSubmit}>
+          שלח
+        </Button>
+        <Button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          בטל
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };

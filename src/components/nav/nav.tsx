@@ -7,6 +7,8 @@ import { Volunteer } from "../pages/volunteer/volunteer";
 import { withWishDetails } from "../pages/wish/withWishDetails";
 import { VolunteerWishDetails } from "../pages/volunteer/volunteerWishDetails/volunteerWishDetails";
 import { UnitWishDetails } from "../pages/unit/unitWishDetails/unitWishDetails";
+import { WishThanksyou } from "../pages/unit/wishThankyou/wishThankyou";
+import { CompletedWish } from "../pages/wish/completedWish/completedWish";
 //import { NewWish } from "../pages/unit/newWish/newWish";
 
 export const Nav = () => {
@@ -31,8 +33,10 @@ export const Nav = () => {
       <Route path="/" element={<Login />} />
       <Route path="/unit" element={<Unit />} />
       <Route path="/volunteer" element={<Volunteer />} />
+      <Route path="/wish/:id" element={<CompletedWish />} />
       <Route path="/volunteer/wish/:id" element={<VolunteerWishDetailsHOC />} />
       <Route path="/unit/wish/:id" element={<UnitWishDetailsHOC />} />
+      <Route path="/unit/wish/:id/thankyou" element={<WishThanksyou />} />
     </Routes>
   );
 };

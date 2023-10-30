@@ -22,6 +22,8 @@ export interface WishDetailsProps {
   specialRequests?: string;
   about?: string;
   imageURL?: string;
+  thankyouMessage?: string;
+  thankyouImageURL?: string;
 }
 
 export const WishDetails = ({

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   background-size: cover;
+  margin-top: var(--spacing-large);
 }
 
 .login-page span.button-group {
@@ -16,13 +17,11 @@
 }
 
 .login-page .unit-login {
-  /* Change to blue color */
   background-color: var(--accent-color);
   color: var(--accent-text-color);
 }
 
 .login-page .volunteer-login {
-  /* Change to red color */
   background-color: var(--primary-color);
   color: var(--secondary-color);
 }

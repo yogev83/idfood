@@ -3,7 +3,7 @@ import { WishDetailsProps } from "../../wish/wishDetails/wishDetails";
 import { UserContext } from "../../../../app/userContext/userContext";
 
 import { WishCard } from "../wishCard/wishCard";
-import { Button, Tab, TabList, Title3 } from "@fluentui/react-components";
+import { Button, Subtitle1, Tab, TabList } from "@fluentui/react-components";
 
 import "./volunteerDashboard.css";
 
@@ -83,19 +83,21 @@ export const VolunteerDashboard = ({
         </Tab>
       </TabList>
       {filteredWishs.length > 0 ? (
-        filteredWishs.map((wish) => (
-          <WishCard
-            key={wish.id}
-            id={wish.id}
-            dish={wish.dish}
-            unitName={wish.unitName}
-            location={wish.location}
-            imageURL={wish.imageURL}
-            onClick={() => handleWishClick(wish)}
-          />
-        ))
+        <span className="wish-cards">
+          {filteredWishs.map((wish) => (
+            <WishCard
+              key={wish.id}
+              id={wish.id}
+              dish={wish.dish}
+              unitName={wish.unitName}
+              location={wish.location}
+              imageURL={wish.imageURL}
+              onClick={() => handleWishClick(wish)}
+            />
+          ))}
+        </span>
       ) : (
-        <Title3>אין לכם בקשות בהמתנה</Title3>
+        <Subtitle1>אין לכם בקשות בהמתנה</Subtitle1>
       )}
       <Button
         appearance="primary"

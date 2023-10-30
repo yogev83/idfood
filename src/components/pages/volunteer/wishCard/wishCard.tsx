@@ -5,7 +5,7 @@ import {
   Card,
   CardHeader,
   CardPreview,
-  Title3,
+  Subtitle1,
 } from "@fluentui/react-components";
 import "./wishCard.css"; // Import your CSS file
 
@@ -28,7 +28,7 @@ export const WishCard = ({
     <Card className="wish-card" onClick={() => onClick(id)} dir="rtl">
       <CardHeader
         className="wish-card-header"
-        header={<Title3>{dish}</Title3>}
+        header={<Subtitle1>{dish}</Subtitle1>}
         description={
           <Caption1>
             <Body1Strong>{unitName}</Body1Strong>

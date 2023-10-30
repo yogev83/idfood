@@ -1,13 +1,16 @@
 .new-wish {
-  padding: 20px;
   text-align: right;
-  background: rgba(255, 255, 255, 0.6);
+  width: 100%;
 }
 
-.new-wish-form {
-  margin-top: 16px;
+.new-wish .new-wish-card-preview {
+  padding: 0 var(--spacing-large);
 }
 
 .new-wish-form label {
   text-align: right;
+}
+
+.new-wish-form .kosher-checkbox {
+  margin: 8px 0;
 }

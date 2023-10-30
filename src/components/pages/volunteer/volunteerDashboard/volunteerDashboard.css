@@ -1,6 +1,15 @@
 .volunteer-dashboard {
   display: flex;
   flex-direction: column;
-  align-items: center;
   border-radius: var(--border-radius-medium);
+}
+
+.volunteer-dashboard .wish-cards {
+  max-height: 75vh;
+  margin: 16px 0;
+  overflow-y: scroll;
+}
+
+.volunteer-dashboard .open-wishs-button {
+  margin-top: var(--spacing-large);
 }

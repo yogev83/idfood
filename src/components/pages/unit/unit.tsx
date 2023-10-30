@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NewWish } from "./newWish/newWish";
 import { UserContext } from "../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
-import { Button, Title2 } from "@fluentui/react-components";
+import { Button } from "@fluentui/react-components";
 
 import "./unit.css";
 
@@ -33,13 +33,12 @@ export const Unit = () => {
         <NewWish />
       ) : (
         <span className="unit-dashboard">
-          <Title2>אין לכם בקשות פעילות</Title2>
           <Button
             appearance="primary"
             onClick={() => setShowNewWish(true)}
             className="new-wish-button"
           >
-            צור בקשה חדשה
+            בקשה חדשה
           </Button>
         </span>
       )}
