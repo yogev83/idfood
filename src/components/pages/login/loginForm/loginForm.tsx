@@ -4,17 +4,39 @@ import { loginAsUnit, loginAsVolunteer } from "../loginService";
 import "./loginForm.css";
 import { UserContext } from "../../../../app/userContext/userContext";
 import { Button, Field, Input } from "@fluentui/react-components";
+import axios from 'axios';
 
 interface LoginFormProps {
-  loginType: string;
+  loginType: 'unit' | 'volunteer';
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // ###
+  if(!user || !user?.id){
+    axios.get('http://localhost:3000/.auth/me')
+      .then(response => {
+        // The user is authenticated, you can use the response data
+        console.log('hi! a')
+        console.log(response.data)
+        setUser({id: response.data.id, email: response.data.emails[0].value, type: loginType})
+        sessionStorage.setItem("loginToken", response.data.id);
+        navigate("/unit");
+      })
+      .catch(error => {
+        // The user is not authenticated, redirect to the login
+        window.location.href = 'http://localhost:3000/.auth/login/';
+      });
+  }
+  else {
+    console.log('not fetched user user is ', user)
+    navigate("/unit");
+  }
+  // ###
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
