@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Define a type for the user data
 export type User = {
   id: string;
-  type: "unit | volunteer";
+  email: string;
+  type: 'unit' | 'volunteer';
   activeWish?: string;
   username?: string;
   unitname?: string;
@@ -16,9 +17,9 @@ type UserContextValue = {
 };
 
 // Create a context with an initial value
-export const UserContext = React.createContext<UserContextValue>({
+export const UserContext = React.createContext<UserContextValue>({  
   user: null,
-  setUser: () => { 
+  setUser: () => {     
     return {}
   }, // Initial setter does nothing
 });

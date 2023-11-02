@@ -10,8 +10,7 @@ export const Menu = ({ closeMenu }: MenuProps) => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("/api/logout", {
-        method: "POST",
+      const response = await fetch("/.auth/logout", {        
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${sessionStorage.getItem("sessionToken")}`, // Pass the session token in the Authorization header

@@ -10,24 +10,33 @@ import "./login.css";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
-  const [loginType, setLoginType] = useState<string | null>(null);
+  const { setUser, user } = useContext(UserContext);
+  const [loginType, setLoginType] = useState<'unit' | 'volunteer' | null>(null);
 
   // Check for existing login token
-  useEffect(() => {
-    const token = sessionStorage.getItem("loginToken");
-    if (token) {
-      // If token exists, get user data and navigate to appropriate page
-      const fetchUserData = async () => {
-        const userData = await loginWithToken(token);
-        setUser(userData);
-        navigate(userData.type);
-      };
+  // useEffect(() => {
+  //   const token = sessionStorage.getItem("loginToken");    
+  //   if (token) {
+  //     // If token exists, get user data and navigate to appropriate page
+  //     const fetchUserData = async () => {
+  //       const userData = await loginWithToken(token);
+  //       setUser(userData);
+  //       navigate(userData.type);
+  //     };
 
-      fetchUserData();
+  //     fetchUserData();
+  //   }
+  // }, [navigate, setUser]);
+
+  console.log('user is ', user)
+  if(user && user.id){
+    if(user.type === 'unit'){
+      navigate("/unit");
     }
-  }, [navigate, setUser]);
-
+    else if(user.type === 'volunteer'){
+      navigate("/volunteer");
+    }
+  }
   const handleUnitLogin = async () => {
     setLoginType("unit");
   };
