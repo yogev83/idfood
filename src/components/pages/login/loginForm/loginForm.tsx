@@ -25,7 +25,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
         console.log(response.data)
         setUser({id: response.data.id, email: response.data.emails[0].value, type: loginType})
         sessionStorage.setItem("loginToken", response.data.id);
-        navigate("/unit");
+        navigate(`/${loginType}`);
       })
       .catch(error => {
         // The user is not authenticated, redirect to the login
@@ -34,7 +34,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ loginType }) => {
   }
   else {
     console.log('not fetched user user is ', user)
-    navigate("/unit");
+    navigate(`/${loginType}`);
   }
   // ###
 
