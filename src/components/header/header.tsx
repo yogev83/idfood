@@ -47,7 +47,7 @@ export const Header = () => {
       </button>
       {user?.username && (
         <Caption1Strong className="welcome">
-          !{user.username} שלום
+          !שלום {user.fullname || user.unitname}
         </Caption1Strong>
       )}
       {isMenuOpen && (

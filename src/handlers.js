@@ -1,11 +1,17 @@
 import { rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
-import { MOCK_USER_DATA, MOCK_WISHS_DATA } from "./mockDB"; // Import MOCK_USER_DATA
+import {
+  MOCK_UNIT_USERS_DATA,
+  MOCK_VOLUNTEER_USERS_DATA,
+  MOCK_WISHS_DATA,
+} from "./mockDB"; // Import MOCK_USER_DATA
 
 // Store MOCK_USER_DATA in sessionStorage under "backend/users"
 let users = JSON.parse(sessionStorage.getItem("backend/users"));
 if (!users) {
-  users = MOCK_USER_DATA;
+  const units = MOCK_UNIT_USERS_DATA;
+  const volunteers = MOCK_VOLUNTEER_USERS_DATA;
+  users = { units, volunteers };
   sessionStorage.setItem("backend/users", JSON.stringify(users));
 }
 
@@ -18,14 +24,18 @@ if (!wishs) {
 
 const handleLogin = (type) => (req, res, ctx) => {
   const { username, password } = req.body; // Get username and password from wish body
+  let user;
 
   // Check if user exists and password is correct
-  const user = Object.values(users).find(
-    (user) =>
-      user.type === type &&
-      user.username === username &&
-      user.password === password
-  );
+  if (type === "unit") {
+    user = Object.values(users.units).find(
+      (user) => user.username === username && user.password === password
+    );
+  } else {
+    user = Object.values(users.volunteers).find(
+      (user) => user.username === username && user.password === password
+    );
+  }
 
   if (!user) {
     return res(
@@ -45,14 +55,104 @@ const handleLogin = (type) => (req, res, ctx) => {
   return res(ctx.status(200), ctx.json({ ...user, token }));
 };
 
+const handleUnitRegitration = async (req, res, ctx) => {
+  const { unitname, username, password, email, about } = await req.json();
+
+  // Check if user already exists
+  const userExists = Object.values(users.units).find(
+    (user) => user.username === username
+  );
+
+  if (userExists) {
+    return res(
+      ctx.status(400),
+      ctx.json({ message: `User with username ${username} already exists` })
+    );
+  }
+
+  // Create new user
+  const newUser = {
+    id: uuidv4(),
+    unitname,
+    username,
+    password,
+    email,
+    about,
+    type: "unit",
+  };
+
+  // Add new user to users
+  users.units[newUser.id] = newUser;
+  sessionStorage.setItem("backend/users", JSON.stringify(users));
+
+  // Automatically log in the new user
+  const token = uuidv4();
+  const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
+  tokens[token] = newUser.id;
+  sessionStorage.setItem("backend/tokens", JSON.stringify(tokens));
+
+  sessionStorage.setItem("backend/sessionToken", token);
+  sessionStorage.setItem("sessionToken", token);
+
+  return res(ctx.status(200), ctx.json({ ...newUser, token }));
+};
+
+const handleVolunteerRegitration = async (req, res, ctx) => {
+  const { fullname, username, password, email, phone, address } =
+    await req.json();
+
+  // Check if user already exists
+  const userExists = Object.values(users.volunteers).find(
+    (user) => user.username === username
+  );
+
+  if (userExists) {
+    return res(
+      ctx.status(400),
+      ctx.json({ message: `User with username ${username} already exists` })
+    );
+  }
+
+  // Create new user
+  const newUser = {
+    id: uuidv4(),
+    fullname,
+    username,
+    password,
+    email,
+    phone,
+    address,
+    type: "volunteer",
+  };
+
+  // Add new user to users
+  users.volunteers[newUser.id] = newUser;
+  sessionStorage.setItem("backend/users", JSON.stringify(users));
+
+  // Automatically log in the new user
+  const token = uuidv4();
+  const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
+  tokens[token] = newUser.id;
+  sessionStorage.setItem("backend/tokens", JSON.stringify(tokens));
+
+  sessionStorage.setItem("backend/sessionToken", token);
+  sessionStorage.setItem("sessionToken", token);
+
+  return res(ctx.status(200), ctx.json({ ...newUser, token }));
+};
+
 export const handlers = [
   rest.post("/api/login/unit", handleLogin("unit")),
   rest.post("/api/login/volunteer", handleLogin("volunteer")),
+  rest.post("api/register/unit", handleUnitRegitration),
+  rest.post("api/register/volunteer", handleVolunteerRegitration),
 
   rest.get("/api/user/:loginToken", (req, res, ctx) => {
     const { loginToken } = req.params;
     const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
-    const userData = users[tokens[loginToken]]; // Retrieve the user data associated with this token from sessionStorage
+
+    const userData =
+      users.units[tokens[loginToken]] || users.volunteers[tokens[loginToken]]; // Retrieve the user data associated with this token from sessionStorage
 
     if (!userData) {
       return res(ctx.status(404), ctx.json({ error: "Invalid login token" }));
@@ -124,11 +224,11 @@ export const handlers = [
     // Update the relevant user with the new active wish
     const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
     const currentUserId = tokens[sessionToken];
-    users[currentUserId].activeWish = newWish.id;
+    users.units[currentUserId].activeWish = newWish.id;
 
     sessionStorage.setItem("backend/users", JSON.stringify(users)); // Store the updated users in sessionStorage under "/users"
 
-    return res(ctx.status(201), ctx.json(users[currentUserId]));
+    return res(ctx.status(201), ctx.json(users.units[currentUserId]));
   }),
 
   rest.get("/api/wishs/:id", (req, res, ctx) => {
@@ -190,14 +290,14 @@ export const handlers = [
       // Remove the activeWish field from the relevant user
       const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
       currentUserId = tokens[sessionToken];
-      delete users[currentUserId].activeWish;
+      delete users.units[currentUserId].activeWish;
       sessionStorage.setItem("backend/users", JSON.stringify(users));
     }
 
     // Save the updated wishs back to sessionStorage
     sessionStorage.setItem("backend/wishs", JSON.stringify(wishs));
 
-    return res(ctx.status(200), ctx.json(users[currentUserId]));
+    return res(ctx.status(200), ctx.json(users.units[currentUserId]));
   }),
 
   rest.get("/api/wishs/:wishId", (req, res, ctx) => {
@@ -225,7 +325,7 @@ export const handlers = [
 
     const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
     const currentUserId = tokens[sessionToken];
-    delete users[currentUserId].activeWish;
+    delete users.units[currentUserId].activeWish;
     sessionStorage.setItem("backend/users", JSON.stringify(users));
 
     delete wishs[wishId];

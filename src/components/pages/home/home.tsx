@@ -17,6 +17,7 @@ export const Home = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const [target, setTarget] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -60,11 +61,16 @@ export const Home = () => {
         </div>
         <div className="collection-container">
           <WishsCollection
-            handleWishClick={() => {
+            handleWishClick={(wish) => {
+              setTarget(wish.id);
               setIsOpen(true);
             }}
           />
-          <LoginDialog loginType={"volunteer"} isOpen={isOpen}></LoginDialog>
+          <LoginDialog
+            loginType={"volunteer"}
+            isOpen={isOpen}
+            target={target}
+          ></LoginDialog>
         </div>
       </div>
     </>

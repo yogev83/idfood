@@ -1,0 +1,9 @@
+.login-form {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.login-form .error {
+  color: red;
+  margin-top: 10px;
+}

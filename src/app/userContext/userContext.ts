@@ -6,6 +6,7 @@ export type User = {
   type: "unit | volunteer";
   email: string
   activeWish?: string;
+  fullname?: string;
   username?: string;
   unitname?: string;
   location?: string;

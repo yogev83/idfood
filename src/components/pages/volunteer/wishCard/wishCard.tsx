@@ -12,14 +12,14 @@ import "./wishCard.css"; // Import your CSS file
 export const WishCard = ({
   id,
   dish,
-  unitName,
+  unitname,
   location,
   imageURL,
   onClick,
 }: {
   id: string;
   dish: string;
-  unitName: string;
+  unitname: string;
   location: string;
   imageURL?: string; // Make imageURL optional
   onClick: (id: string) => void;
@@ -31,7 +31,7 @@ export const WishCard = ({
         header={<Subtitle1>{dish}</Subtitle1>}
         description={
           <Caption1>
-            <Body1Strong>{unitName}</Body1Strong>
+            <Body1Strong>{unitname}</Body1Strong>
             <Body1 className="wish-card-location">{location}</Body1>
           </Caption1>
         }

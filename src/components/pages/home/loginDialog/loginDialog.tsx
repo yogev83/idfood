@@ -16,15 +16,19 @@ import {
 } from "@fluentui/react-components";
 
 import "./loginDialog.css";
+import { UnitRegisterDialog } from "../registerDialog/unitRegisterDialog";
+import { VolunteerRegisterDialog } from "../registerDialog/volunteerRegisterDialog";
 
 interface LoginDialogProps {
   loginType: string;
   isOpen?: boolean;
+  target?: string;
 }
 
 export const LoginDialog: React.FC<LoginDialogProps> = ({
   loginType,
   isOpen,
+  target,
 }) => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -54,7 +58,7 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({
 
       sessionStorage.setItem("loginToken", userData.token);
       setUser(userData);
-      navigate(loginType);
+      target ? navigate(`/volunteer/wish/${target}`) : navigate(loginType);
     } catch (error: any) {
       console.log(error);
       // If the login attempt fails, set the error message
@@ -108,9 +112,15 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({
                 התחבר
               </Button>
             </DialogTrigger>
-            <DialogTrigger disableButtonEnhancement>
-              <Button>משתמשים חדשים?</Button>
-            </DialogTrigger>
+            {loginType === "unit" ? (
+              <DialogTrigger disableButtonEnhancement>
+                <UnitRegisterDialog />
+              </DialogTrigger>
+            ) : (
+              <DialogTrigger disableButtonEnhancement>
+                <VolunteerRegisterDialog />
+              </DialogTrigger>
+            )}
           </DialogActions>
         </DialogBody>
       </DialogSurface>

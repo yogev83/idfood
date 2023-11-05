@@ -89,7 +89,7 @@ export const VolunteerDashboard = ({
               key={wish.id}
               id={wish.id}
               dish={wish.dish}
-              unitName={wish.unitName}
+              unitname={wish.unitname}
               location={wish.location}
               imageURL={wish.imageURL}
               onClick={() => handleWishClick(wish)}

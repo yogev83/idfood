@@ -13,7 +13,7 @@ import { ReactNode } from "react";
 export interface WishDetailsProps {
   id: string;
   status: "Open" | "Active" | "Closed";
-  unitName: string;
+  unitname: string;
   maker?: string;
   deliverer?: string;
   dish: string;
