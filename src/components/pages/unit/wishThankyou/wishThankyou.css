@@ -1,6 +1,7 @@
 .wish-thankyou {
   position: relative;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 56px);
+  box-sizing: border-box;
   background-color: var(--accent-color);
   color: var(--accent-text-color);
   padding: var(--spacing-large);

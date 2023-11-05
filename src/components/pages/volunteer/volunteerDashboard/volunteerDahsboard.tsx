@@ -78,9 +78,9 @@ export const VolunteerDashboard = ({
         <Tab value="toMake" disabled={!isMaker}>
           להכנה
         </Tab>
-        <Tab value="toDeliver" disabled={!isDeliverer}>
+        {/* <Tab value="toDeliver" disabled={!isDeliverer}>
           למשלוח
-        </Tab>
+        </Tab> */}
       </TabList>
       {filteredWishs.length > 0 ? (
         <span className="wish-cards">

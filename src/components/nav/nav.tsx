@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 //import { checkUser } from "../../app/checkUser";
-import { Login } from "../pages/login/login";
 import { Unit } from "../pages/unit/unit";
 import { Volunteer } from "../pages/volunteer/volunteer";
 import { withWishDetails } from "../pages/wish/withWishDetails";
@@ -9,6 +8,7 @@ import { VolunteerWishDetails } from "../pages/volunteer/volunteerWishDetails/vo
 import { UnitWishDetails } from "../pages/unit/unitWishDetails/unitWishDetails";
 import { WishThanksyou } from "../pages/unit/wishThankyou/wishThankyou";
 import { CompletedWish } from "../pages/wish/completedWish/completedWish";
+import { Home } from "../pages/home/home";
 //import { NewWish } from "../pages/unit/newWish/newWish";
 
 export const Nav = () => {
@@ -30,7 +30,7 @@ export const Nav = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Home />} />
       <Route path="/unit" element={<Unit />} />
       <Route path="/volunteer" element={<Volunteer />} />
       <Route path="/wish/:id" element={<CompletedWish />} />

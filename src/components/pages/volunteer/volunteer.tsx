@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { WishsCollection } from "./wishsCollection/wishsCollection";
+import { WishsCollection } from "../../wishsCollection/wishsCollection";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../app/userContext/userContext";
 import { VolunteerDashboard } from "./volunteerDashboard/volunteerDahsboard";

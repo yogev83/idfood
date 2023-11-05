@@ -7,8 +7,7 @@ import { UserContext } from "../../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 
 import "./volunteerWishDetails.css";
-import { Button, Caption1Strong } from "@fluentui/react-components";
-import { CheckmarkCircle24Regular } from "@fluentui/react-icons";
+import { MakeDialog } from "./makeDialog/makeDialog";
 
 export const VolunteerWishDetails = ({
   wishDetails,
@@ -53,9 +52,11 @@ export const VolunteerWishDetails = ({
     throw new Error("Wish is required");
   }
 
-  const { status, maker, deliverer } = wishDetails;
+  if (!user) {
+    navigate("/");
+  }
 
-  console.log(status, maker, deliverer);
+  const { status, maker } = wishDetails;
 
   return (
     <div className="volunteer-wish-details" dir="rtl">
@@ -63,28 +64,11 @@ export const VolunteerWishDetails = ({
         {status === "Open" && (
           <>
             {!maker && (
-              <Button
-                appearance="primary"
-                className="done-button"
-                icon={<CheckmarkCircle24Regular />}
-                onClick={() => handleWish("maker")}
-              >
-                <Caption1Strong className="action-caption">
-                  אני במטבח
-                </Caption1Strong>
-              </Button>
-            )}
-            {!deliverer && (
-              <Button
-                appearance="primary"
-                className="cancel-button"
-                icon={<CheckmarkCircle24Regular />}
-                onClick={() => handleWish("deliverer")}
-              >
-                <Caption1Strong className="action-caption">
-                  אני אקח
-                </Caption1Strong>
-              </Button>
+              <MakeDialog
+                handleDone={() => {
+                  handleWish("maker");
+                }}
+              />
             )}
           </>
         )}

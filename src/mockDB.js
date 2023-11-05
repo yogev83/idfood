@@ -14,7 +14,9 @@ export const MOCK_USER_DATA = {
     username: "rahel",
     password: "1234",
     name: "Rahel",
-    location: "שדרות",
+    address: "ארץ ישראל 23, שדרות",
+    phone: "0506793961",
+    email: "rahel@hotmail.com",
   },
   "4cc3223-3bbf-1111-8045-3232233ff24": {
     id: "4cc3223-3bbf-1111-8045-3232233ff24",
@@ -22,14 +24,16 @@ export const MOCK_USER_DATA = {
     username: "yogev",
     password: "7583",
     name: "Yogev Hadad",
-    location: "פתח תקווה",
+    address: "פרידמן 13, פתח תקווה",
+    phone: "0506793963",
+    email: "yogev_83@hotmail.com",
   },
 };
 
 export const MOCK_WISHS_DATA = {
   "43aad0-32vf-4d0e": {
     id: "43aad0-32vf-4d0e",
-    dish: "ג'חנון תימני אסלי",
+    dish: "ג'חנון",
     unitName: "פלוגת עורב",
     location: "אזור קרית שמונה",
     imageURL: "/soldiers2.jpeg",
@@ -44,5 +48,15 @@ export const MOCK_WISHS_DATA = {
     imageURL: "/soldiers1.jpeg",
     status: "Open", // Add status
     numSoldiers: 5, // Add numSoldiers
+  },
+  "567eds76g0-77dd-aa12": {
+    id: "567eds76g0-77dd-aa12",
+    dish: "שניצל וצ'פס",
+    unitName: "להב",
+    location: "עוטף עזה",
+    imageURL: "/soldiers3.jpeg",
+    status: "Open", // Add status
+    numSoldiers: 2, // Add numSoldiers
+    specialRequests: "מתים לשניצל וצ'יפס כמו בבית. נשמח להרבה קטשופ בבקשה",
   },
 };

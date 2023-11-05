@@ -4,9 +4,13 @@ import React from 'react';
 export type User = {
   id: string;
   type: "unit | volunteer";
+  email: string
   activeWish?: string;
   username?: string;
   unitname?: string;
+  location?: string;
+  address?: string;
+  phone?: string
 };
 
 // Define a type for the context value

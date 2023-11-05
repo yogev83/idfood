@@ -68,15 +68,15 @@ export const handlers = [
   }),
 
   rest.get("/api/wishs", (req, res, ctx) => {
-    // Get the session token from the wish headers
-    const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
+    // // Get the session token from the wish headers
+    // const sessionToken = req.headers.get("Authorization")?.split(" ")[1];
 
-    // Check if there is a logged-in user and if their session token matches the one from the wish
-    const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
+    // // Check if there is a logged-in user and if their session token matches the one from the wish
+    // const loggedInUserToken = sessionStorage.getItem("backend/sessionToken");
 
-    if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
-      return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
-    }
+    // if (!loggedInUserToken || loggedInUserToken !== sessionToken) {
+    //   return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
+    // }
 
     const wishs = JSON.parse(sessionStorage.getItem("backend/wishs")) || {};
     let filteredWishs = Object.values(wishs);
@@ -254,5 +254,17 @@ export const handlers = [
       ctx.status(200),
       ctx.json({ message: "Logged out successfully" })
     );
+  }),
+
+  rest.get("/api/wishs/:wishId", (req, res, ctx) => {
+    const { wishId } = req.params;
+    const wishs = JSON.parse(sessionStorage.getItem("backend/wishs")) || {};
+    const wish = wishs[wishId]; // Retrieve the wish associated with this id from sessionStorage
+
+    if (!wish) {
+      return res(ctx.status(404), ctx.json({ error: "Invalid wish id" }));
+    }
+
+    return res(ctx.status(200), ctx.json(wish));
   }),
 ];

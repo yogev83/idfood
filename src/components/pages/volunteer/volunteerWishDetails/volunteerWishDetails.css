@@ -1,6 +1,7 @@
 .volunteer-wish-details {
   position: relative;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 56px);
+  box-sizing: border-box;
   padding: var(--spacing-large);
   background: url("israel.png");
   background-size: 100% 100%;

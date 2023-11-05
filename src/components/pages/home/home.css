@@ -1,0 +1,48 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.background-image {
+  width: 100%;
+}
+
+.background-image img {
+  width: 100%;
+  height: auto;
+}
+
+.login-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: var(--spacing-large) 0;
+  margin-top: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.collection-container {
+  padding: 0 20px;
+}
+
+.about-idfood {
+  display: flex;
+  align-items: center;
+  padding: 8px var(--spacing-large);
+}
+
+.about-idfood img {
+  height: 64px;
+}
+
+.about-idfood span.about-idfood-body {
+  margin-right: 12px;
+  text-align: right;
+}
