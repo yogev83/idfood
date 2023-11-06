@@ -280,8 +280,11 @@ export const handlers = [
     // Update the wish with the new data
     Object.assign(wish, update);
 
-    // If both maker and deliverer are populated, update status to Active
-    if (wish.maker && wish.deliverer) {
+    // // If both maker and deliverer are populated, update status to Active
+    // if (wish.maker && wish.deliverer) {
+    //   wish.status = "Active";
+    // }
+    if (wish.maker) {
       wish.status = "Active";
     }
 

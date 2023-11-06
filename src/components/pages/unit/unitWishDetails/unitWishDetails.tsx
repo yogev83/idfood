@@ -165,22 +165,6 @@ export const UnitWishDetails = ({
           </div>
         </div>
       )}
-
-      {/* Done Popup */}
-      {/* {showDonePopup && (
-        <div className="popup-overlay" onClick={() => setShowDonePopup(false)}>
-          <div className="popup-content">
-            <div
-              className="close-button"
-              onClick={() => setShowDonePopup(false)}
-            >
-              X
-            </div>
-            <p>?בתיאבון! לסגור בקשה</p>
-            <button onClick={handleDone}>כן</button>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
