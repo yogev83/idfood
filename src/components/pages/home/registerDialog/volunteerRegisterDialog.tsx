@@ -106,7 +106,7 @@ export const VolunteerRegisterDialog = () => {
       <DialogSurface>
         <DialogBody className="register-dialog-body">
           <DialogContent className="dialog-content">
-            <Subtitle1>הרשמה כחיילים</Subtitle1>
+            <Subtitle1>הרשמה כאזרחים</Subtitle1>
             <form className="register-form" onSubmit={handleSubmit} dir="rtl">
               <Field
                 label="שם משתמש"
