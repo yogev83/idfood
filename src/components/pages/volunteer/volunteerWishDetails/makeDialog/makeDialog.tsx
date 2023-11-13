@@ -53,12 +53,12 @@ export const MakeDialog = ({ handleDone }: { handleDone: () => void }) => {
           </DialogContent>
           <DialogActions>
             <DialogTrigger disableButtonEnhancement>
-              <Button appearance="secondary">התחרטתי</Button>
-            </DialogTrigger>
-            <DialogTrigger disableButtonEnhancement>
               <Button onClick={handleDone} appearance="primary">
                 מסכימ/ה
               </Button>
+            </DialogTrigger>
+            <DialogTrigger disableButtonEnhancement>
+              <Button appearance="secondary">התחרטתי</Button>
             </DialogTrigger>
           </DialogActions>
         </DialogBody>

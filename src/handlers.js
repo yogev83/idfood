@@ -22,6 +22,16 @@ if (!wishs) {
   sessionStorage.setItem("backend/wishs", JSON.stringify(wishs));
 }
 
+let notifications =
+  JSON.parse(sessionStorage.getItem("backend/notifications")) || [];
+const addNotification = (notification) => {
+  notifications.push(notification);
+  sessionStorage.setItem(
+    "backend/notifications",
+    JSON.stringify(notifications)
+  );
+};
+
 const handleLogin = (type) => (req, res, ctx) => {
   const { username, password } = req.body; // Get username and password from wish body
   let user;
@@ -48,11 +58,21 @@ const handleLogin = (type) => (req, res, ctx) => {
   const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
   tokens[token] = user.id;
   sessionStorage.setItem("backend/tokens", JSON.stringify(tokens)); // Store the token and its data in sessionStorage
+  const notifications =
+    JSON.parse(sessionStorage.getItem("backend/notifications")) || [];
+
+  // Filter notifications based on the user's ID
+  const userNotifications = notifications.filter((notification) =>
+    notification.notifyTo.includes(user.id)
+  );
 
   sessionStorage.setItem("backend/sessionToken", token);
   sessionStorage.setItem("sessionToken", token); //Should this be replaced with a cookie in the real backend?...
 
-  return res(ctx.status(200), ctx.json({ ...user, token }));
+  return res(
+    ctx.status(200),
+    ctx.json({ ...user, token, notifications: userNotifications })
+  );
 };
 
 const handleUnitRegitration = async (req, res, ctx) => {
@@ -214,16 +234,18 @@ export const handlers = [
       return res(ctx.status(401), ctx.json({ error: "Not authorized" }));
     }
 
+    // Update the relevant user with the new active wish
+    const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
+    const currentUserId = tokens[sessionToken];
+
     const newWish = await req.json(); // Get the new wish from the wish body
     newWish.id = uuidv4(); // Assign a random id to the new wish
+    newWish.user = currentUserId;
     newWish.status = "Open";
 
     wishs[newWish.id] = newWish;
     sessionStorage.setItem("backend/wishs", JSON.stringify(wishs)); // Store the new wish in sessionStorage under "/wishs"
 
-    // Update the relevant user with the new active wish
-    const tokens = JSON.parse(sessionStorage.getItem("backend/tokens")) || {};
-    const currentUserId = tokens[sessionToken];
     users.units[currentUserId].activeWish = newWish.id;
 
     sessionStorage.setItem("backend/users", JSON.stringify(users)); // Store the updated users in sessionStorage under "/users"
@@ -286,6 +308,15 @@ export const handlers = [
     // }
     if (wish.maker) {
       wish.status = "Active";
+
+      // Add a new notification with the relevant user IDs
+      const notification = {
+        notifyTo: [wish.user /* Add other relevant user IDs */],
+        message: `Your wish has been assigned by ${update.maker}`,
+        // You can include other notification details as needed
+      };
+
+      addNotification(notification);
     }
 
     let currentUserId;

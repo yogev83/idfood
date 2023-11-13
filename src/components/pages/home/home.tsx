@@ -2,14 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../app/userContext/userContext";
 import {
+  Body1Stronger,
+  Button,
   Caption1,
-  Caption1Strong,
   Subtitle2Stronger,
 } from "@fluentui/react-components";
 
 import { WishsCollection } from "../../wishsCollection/wishsCollection";
-import { LoginDialog } from "./loginDialog/loginDialog";
 import { loginWithToken } from "./loginService";
+
+import { LoginDialogWithExternalTrigger } from "./loginDialog/loginDialogWithExternalTrigger";
+import { LoginDialogWithTriggerButton } from "./loginDialog/loginDialogWithTriggerButton";
 
 import "./home.css";
 
@@ -38,9 +41,13 @@ export const Home = () => {
     <>
       <div className="home-page" dir="rtl">
         <div className="login-strip">
-          <Caption1Strong> התחברו בתור</Caption1Strong>
-          <LoginDialog loginType={"volunteer"}></LoginDialog>
-          <LoginDialog loginType={"unit"}></LoginDialog>
+          <Body1Stronger> התחברו בתור</Body1Stronger>
+          <LoginDialogWithTriggerButton loginType={"volunteer"}>
+            <Button>אזרחים מתנדבים</Button>
+          </LoginDialogWithTriggerButton>
+          <LoginDialogWithTriggerButton loginType={"unit"}>
+            <Button>חיילים רעבים</Button>
+          </LoginDialogWithTriggerButton>
         </div>
         <div className="background-image">
           <img src="home.jpeg" alt="Background" /> {/* Add your image here */}
@@ -66,11 +73,11 @@ export const Home = () => {
               setIsOpen(true);
             }}
           />
-          <LoginDialog
+          <LoginDialogWithExternalTrigger
             loginType={"volunteer"}
             isOpen={isOpen}
             target={target}
-          ></LoginDialog>
+          />
         </div>
       </div>
     </>

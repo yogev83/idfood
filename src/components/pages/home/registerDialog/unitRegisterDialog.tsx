@@ -49,10 +49,10 @@ export const UnitRegisterDialog = () => {
       return;
     }
 
-    if (!password || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-      setShouldShowPasswordError(true);
-      return;
-    }
+    // if (!password || !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+    //   setShouldShowPasswordError(true);
+    //   return;
+    // }
 
     if (password !== verifyPassword) {
       setShouldShowVerifyPasswordError(true);

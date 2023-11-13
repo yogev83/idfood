@@ -1,0 +1,33 @@
+.slidy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--primary-color);
+  padding: var(--spacing-large);
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  z-index: 99;
+}
+
+.slidy.open {
+  transform: translateX(0);
+}
+
+.slidy-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.slidy .close-icon {
+  cursor: pointer;
+}
+
+.slidy .slidy-content {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}

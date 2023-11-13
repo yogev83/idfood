@@ -15,9 +15,10 @@ import {
   Subtitle1,
 } from "@fluentui/react-components";
 
-import "./loginDialog.css";
 import { UnitRegisterDialog } from "../registerDialog/unitRegisterDialog";
 import { VolunteerRegisterDialog } from "../registerDialog/volunteerRegisterDialog";
+
+import "./loginDialog.css";
 
 interface LoginDialogProps {
   loginType: string;

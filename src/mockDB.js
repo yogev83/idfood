@@ -27,6 +27,7 @@ export const MOCK_VOLUNTEER_USERS_DATA = {
 export const MOCK_WISHS_DATA = {
   "43aad0-32vf-4d0e": {
     id: "43aad0-32vf-4d0e",
+    unit: "A22B1F92-3F99-11D3-9A0C-0305E82C3301",
     dish: "ג'חנון",
     unitname: "פלוגת עורב",
     location: "אזור קרית שמונה",
@@ -36,6 +37,7 @@ export const MOCK_WISHS_DATA = {
   },
   "555sa-ab23-3333": {
     id: "555sa-ab23-3333",
+    unit: "1B4E28BA-2FA1-11D2-883F-0016D3CCA427",
     dish: "קובה סלק",
     unitname: "גבעתי",
     location: "עוטף עזה",
@@ -45,6 +47,7 @@ export const MOCK_WISHS_DATA = {
   },
   "f84bbag0-11af-453e": {
     id: "f84bbag0-11af-453e",
+    unit: "6D940C41-12E4-11D3-AFB7-00805F8ADD32",
     dish: "פנקייקים",
     unitname: "יחידת הנדסה",
     location: "אזור אשקלון",
@@ -54,6 +57,7 @@ export const MOCK_WISHS_DATA = {
   },
   "567eds76g0-77dd-aa12": {
     id: "567eds76g0-77dd-aa12",
+    unit: "3F2504E0-4F89-11D3-9A0C-0305E82C3301",
     dish: "שניצל וצ'פס",
     unitname: "להב",
     location: "עוטף עזה",

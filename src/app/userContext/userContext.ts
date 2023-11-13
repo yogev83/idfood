@@ -11,7 +11,8 @@ export type User = {
   unitname?: string;
   location?: string;
   address?: string;
-  phone?: string
+  phone?: string;
+  notifications?: string[]
 };
 
 // Define a type for the context value

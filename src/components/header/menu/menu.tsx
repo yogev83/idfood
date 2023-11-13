@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { Slidy } from "../../slidy/slidy";
+import { Navigation24Regular } from "@fluentui/react-icons";
+import { useContext, useState } from "react";
+
+import { Body1Strong } from "@fluentui/react-components";
+import { UserContext } from "../../../app/userContext/userContext";
+import { LoginDialogWithTriggerButton } from "../../pages/home/loginDialog/loginDialogWithTriggerButton";
+
 import "./menu.css";
 
-type MenuProps = {
-  closeMenu: () => void;
-};
-
-export const Menu = ({ closeMenu }: MenuProps) => {
+export const Menu = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -25,17 +32,31 @@ export const Menu = ({ closeMenu }: MenuProps) => {
       sessionStorage.removeItem("sessionToken"); // Remove the session token from sessionStorage
       sessionStorage.removeItem("loginToken"); // Remove the login token
       navigate("/");
-      closeMenu(); // Close the menu
+      setIsOpen(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="menu">
-      <p onClick={handleLogout} className="menu-item">
-        התנתק
-      </p>
-    </div>
+    <>
+      <Navigation24Regular onClick={() => setIsOpen(true)} />
+      <Slidy open={isOpen} onClose={() => setIsOpen(false)}>
+        {user ? (
+          <Body1Strong onClick={handleLogout} className="menu-item">
+            יציאה
+          </Body1Strong>
+        ) : (
+          <>
+            <LoginDialogWithTriggerButton loginType={"unit"}>
+              <Body1Strong className="menu-item">התחברו כחיילים</Body1Strong>{" "}
+            </LoginDialogWithTriggerButton>
+            <LoginDialogWithTriggerButton loginType={"volunteer"}>
+              <Body1Strong className="menu-item">התחברו כמתנדבים</Body1Strong>
+            </LoginDialogWithTriggerButton>
+          </>
+        )}
+      </Slidy>
+    </>
   );
 };
