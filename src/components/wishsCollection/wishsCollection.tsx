@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { WishCard } from "../pages/volunteer/wishCard/wishCard";
+import { WishCard } from "../wishCard/wishCard";
 import { WishDetailsProps } from "../pages/wish/wishDetails/wishDetails";
 
 import "./wishCollection.css";

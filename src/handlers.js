@@ -207,7 +207,10 @@ export const handlers = [
     // Filter wishs where the current user is either the maker or deliverer
     if (userFilter) {
       filteredWishs = filteredWishs.filter(
-        (wish) => wish.maker === userFilter || wish.deliverer === userFilter
+        (wish) =>
+          wish.maker === userFilter ||
+          wish.deliverer === userFilter ||
+          wish.unit === userFilter
       );
     }
 

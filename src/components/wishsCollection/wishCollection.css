@@ -1,3 +1,5 @@
 .wish-collection {
   text-align: center;
+  max-height: 85vh;
+  overflow-y: scroll;
 }

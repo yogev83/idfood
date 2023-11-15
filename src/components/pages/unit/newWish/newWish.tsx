@@ -1,4 +1,4 @@
-import { SetStateAction, useContext, useState } from "react";
+import { SetStateAction, useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { UserContext } from "../../../../app/userContext/userContext";
 import {
@@ -46,55 +46,69 @@ export const NewWish = () => {
 
   const navigate = useNavigate(); // Access navigate
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    async (event: { preventDefault: () => void }) => {
+      event.preventDefault();
 
-    if (!dish) {
-      setShouldShowDishError(true);
-      alert("נא למלא את כל שדות החובה");
-      return;
-    }
+      if (!dish) {
+        setShouldShowDishError(true);
+        alert("נא למלא את כל שדות החובה");
+        return;
+      }
 
-    if (!location) {
-      setShouldShowLocationError(true);
-      alert("נא למלא את כל שדות החובה");
-      return;
-    }
+      if (!location) {
+        setShouldShowLocationError(true);
+        alert("נא למלא את כל שדות החובה");
+        return;
+      }
 
-    // Create a new JavaScript object
-    const newWish = {
+      // Create a new JavaScript object
+      const newWish = {
+        unit: user?.id,
+        dish,
+        numSoldiers,
+        location,
+        image,
+        specialRequests,
+        kosherOnly,
+      };
+
+      // Get the session token of the currently logged-in user
+      const sessionToken = sessionStorage.getItem("sessionToken");
+
+      // Make a POST request to your API
+      const response = await fetch("/api/wishs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionToken}`, // Include the session token in the headers
+        },
+        body: JSON.stringify(newWish),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to submit wish");
+        return;
+      }
+
+      const newUser = await response.json();
+      setUser(newUser);
+      navigate("/unit"); // Navigate back to the Unit page
+    },
+    [
       dish,
-      numSoldiers,
-      location,
       image,
-      specialRequests,
       kosherOnly,
-    };
-
-    // Get the session token of the currently logged-in user
-    const sessionToken = sessionStorage.getItem("sessionToken");
-
-    // Make a POST request to your API
-    const response = await fetch("/api/wishs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionToken}`, // Include the session token in the headers
-      },
-      body: JSON.stringify(newWish),
-    });
-
-    if (!response.ok) {
-      console.error("Failed to submit wish");
-      return;
-    }
-
-    const newUser = await response.json();
-    setUser(newUser);
-    navigate("/unit"); // Navigate back to the Unit page
-  };
+      location,
+      navigate,
+      numSoldiers,
+      setUser,
+      specialRequests,
+      user,
+    ]
+  );
 
   return (
     <Card className="new-wish" dir="rtl">

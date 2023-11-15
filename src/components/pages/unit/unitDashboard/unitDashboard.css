@@ -1,14 +1,14 @@
-.volunteer-dashboard {
+.unit-dashboard {
   display: flex;
   flex-direction: column;
 }
 
-.volunteer-dashboard .wish-cards {
+.unit-dashboard .wish-cards {
   max-height: 85vh;
   margin: 16px 0;
   overflow-y: scroll;
 }
 
-.volunteer-dashboard .open-wishs-button {
+.unit-dashboard .new-wish-button {
   margin-top: var(--spacing-large);
 }

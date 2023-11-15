@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { NewWish } from "./newWish/newWish";
 import { UserContext } from "../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@fluentui/react-components";
+
+import { UnitDashboard } from "./unitDashboard/unitDashboard";
+import { WishDetailsProps } from "../wish/wishDetails/wishDetails";
 
 import "./unit.css";
 
@@ -12,35 +14,25 @@ export const Unit = () => {
 
   const navigate = useNavigate(); // Access navigate
 
+  const handleWishClick = (wish: any) => {
+    navigate(`/unit/wish/${wish.id}`);
+  };
+
   useEffect(() => {
     if (!user) {
       navigate("/");
     }
   }, [user, navigate]);
 
-  useEffect(() => {
-    if (user?.activeWish) {
-      fetch(`/api/wishs/${user.activeWish}`)
-        .then((response) => response.json())
-        .then(() => navigate(`/unit/wish/${user.activeWish}`));
-      setShowNewWish(false);
-    }
-  }, [navigate, user, user?.activeWish]);
-
   return (
-    <div className="unit-page">
+    <div className="unit-page" dir="rtl">
       {showNewWish ? (
         <NewWish />
       ) : (
-        <span className="unit-dashboard">
-          <Button
-            appearance="primary"
-            onClick={() => setShowNewWish(true)}
-            className="new-wish-button"
-          >
-            בקשה חדשה
-          </Button>
-        </span>
+        <UnitDashboard
+          handleWishClick={handleWishClick}
+          handleNewWishClick={() => setShowNewWish(true)}
+        />
       )}
     </div>
   );

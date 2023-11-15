@@ -39,7 +39,7 @@ export const Menu = () => {
   };
 
   return (
-    <>
+    <div className="menu">
       <Navigation24Regular onClick={() => setIsOpen(true)} />
       <Slidy open={isOpen} onClose={() => setIsOpen(false)}>
         {user ? (
@@ -49,14 +49,18 @@ export const Menu = () => {
         ) : (
           <>
             <LoginDialogWithTriggerButton loginType={"unit"}>
-              <Body1Strong className="menu-item">התחברו כחיילים</Body1Strong>{" "}
+              <div className="menu-item">
+                <Body1Strong>התחברו כחיילים</Body1Strong>{" "}
+              </div>
             </LoginDialogWithTriggerButton>
             <LoginDialogWithTriggerButton loginType={"volunteer"}>
-              <Body1Strong className="menu-item">התחברו כמתנדבים</Body1Strong>
+              <div className="menu-item">
+                <Body1Strong>התחברו כמתנדבים</Body1Strong>
+              </div>
             </LoginDialogWithTriggerButton>
           </>
         )}
       </Slidy>
-    </>
+    </div>
   );
 };
