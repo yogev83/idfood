@@ -8,6 +8,7 @@ import { UserContext } from "../../../app/userContext/userContext";
 import { LoginDialogWithTriggerButton } from "../../pages/home/loginDialog/loginDialogWithTriggerButton";
 
 import "./menu.css";
+import { Notifications } from "../notifications/notifications";
 
 export const Menu = () => {
   const { user } = useContext(UserContext);
@@ -43,9 +44,12 @@ export const Menu = () => {
       <Navigation24Regular onClick={() => setIsOpen(true)} />
       <Slidy open={isOpen} onClose={() => setIsOpen(false)}>
         {user ? (
-          <Body1Strong onClick={handleLogout} className="menu-item">
-            יציאה
-          </Body1Strong>
+          <>
+            <Notifications />
+            <Body1Strong onClick={handleLogout} className="menu-item">
+              יציאה
+            </Body1Strong>
+          </>
         ) : (
           <>
             <LoginDialogWithTriggerButton loginType={"unit"}>

@@ -1,0 +1,8 @@
+.notification {
+  display: flex;
+  align-items: center;
+}
+
+.notification .notification-badge {
+  margin-left: 12px;
+}

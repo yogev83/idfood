@@ -36,8 +36,6 @@ export const UnitWishDetails = ({
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   // const [showDonePopup, setShowDonePopup] = useState(false);
 
-  console.log("wishDetails", wishDetails);
-
   const handleCancel = async () => {
     if (!wishDetails) {
       return;

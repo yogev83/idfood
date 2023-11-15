@@ -12,7 +12,7 @@ export type User = {
   location?: string;
   address?: string;
   phone?: string;
-  notifications?: string[]
+  notifications?: any[] //FIX THIS
 };
 
 // Define a type for the context value
