@@ -4,7 +4,6 @@ import { UserContext } from "../../../app/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 
 import { UnitDashboard } from "./unitDashboard/unitDashboard";
-import { WishDetailsProps } from "../wish/wishDetails/wishDetails";
 
 import "./unit.css";
 
