@@ -4,7 +4,6 @@
   },
   "hosting": {
     "site": "idfood",
-
-    "public": "public"
+    "public": "build"
   }
 }
